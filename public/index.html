@@ -1,0 +1,2046 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Djaouleerou-Garoua — Culture, Vie & Beauté du Nord</title>
+  <meta name="description" content="Découvrez la beauté cachée de Garoua — ses monuments, sa culture, ses saveurs et ses recoins."/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Bricolage+Grotesque:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+   <!-- SEO -->
+  <meta name="description" content="Djawleerou Garoua est le blog de référence sur la ville de Garoua au Cameroun. Monuments, culture, saveurs locales, événements et vie quotidienne du Nord."/>
+  <meta name="author" content="Abdoul Nasser"/>
+  <meta name="keywords" content="Garoua, Cameroun, Nord Cameroun, culture, monuments, saveurs, événements, blog"/>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/images/favicon.png"/>
+  <link rel="apple-touch-icon" href="/images/favicon.png"/>
+
+  <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:site_name" content="Djawleerou Garoua"/>
+  <meta property="og:title" content="Djawleerou Garoua — Culture, Vie & Beauté du Nord Cameroun"/>
+  <meta property="og:description" content="Découvrez Garoua autrement : monuments historiques, gastronomie locale, événements culturels et récits du quotidien au cœur du Nord Cameroun."/>
+  <meta property="og:url" content="https://djawleerou-garoua.onrender.com"/>
+  <meta property="og:image" content="https://djawleerou-garoua.onrender.com/images/og-image.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:locale" content="fr_FR"/>
+ <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --terracotta: #c9502a;
+      --terracotta2: #e86940;
+      --sand:       #f5e6c8;
+      --sand2:      #ede0c4;
+      --ochre:      #d4891a;
+      --sky:        #3b82c4;
+      --sky2:       #5ba3e8;
+      --green:      #2d7a4f;
+      --green2:     #48a872;
+      --cream:      #fdf8f0;
+      --dark:       #1a1208;
+      --dark2:      #2d2010;
+      --text:       #2d2010;
+      --muted:      #8a7060;
+      --white:      #ffffff;
+      --radius:     16px;
+      --font-head:  'Playfair Display', Georgia, serif;
+      --font-body:  'Bricolage Grotesque', sans-serif;
+      --font-accent:'Dancing Script', cursive;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ════════════════════════════════
+       HEADER / NAV
+    ════════════════════════════════ */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--cream);
+      border-bottom: 2px solid var(--sand2);
+      padding: 0 5vw;
+    }
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      gap: 16px;
+    }
+    .logo-block { text-align: center; flex: 1; }
+    .logo-accent {
+      font-family: var(--font-accent);
+      font-size: 13px;
+      color: var(--terracotta);
+      display: block;
+      margin-bottom: -4px;
+      letter-spacing: 1px;
+    }
+    .logo-main {
+      font-family: var(--font-head);
+      font-size: clamp(22px, 4vw, 36px);
+      font-weight: 900;
+      color: var(--dark);
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .logo-main span { color: var(--terracotta); }
+    .logo-sub {
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 3px;
+      display: block;
+    }
+
+    /* Search bar */
+    .search-wrap {
+      position: relative;
+      width: 200px;
+      flex-shrink: 0;
+    }
+    .search-input {
+      width: 100%;
+      padding: 9px 16px 9px 36px;
+      border: 1.5px solid var(--sand2);
+      border-radius: 30px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    .search-input:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px rgba(201,80,42,.1);
+    }
+    .search-icon {
+      position: absolute;
+      left: 11px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted);
+      pointer-events: none;
+    }
+    .search-icon svg { width: 15px; height: 15px; }
+
+    /* Search results dropdown */
+    .search-results {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0; right: 0;
+      background: var(--white);
+      border: 1.5px solid var(--sand2);
+      border-radius: 14px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.12);
+      display: none;
+      z-index: 300;
+      overflow: hidden;
+    }
+    .search-results.show { display: block; }
+    .search-result-item {
+      padding: 10px 16px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--sand2);
+      font-size: 13px;
+      transition: background .15s;
+    }
+    .search-result-item:last-child { border-bottom: none; }
+    .search-result-item:hover { background: var(--sand); }
+    .search-result-item strong { display: block; color: var(--text); }
+    .search-result-item span { color: var(--muted); font-size: 11px; }
+    .search-no-result { padding: 14px 16px; color: var(--muted); font-size: 13px; text-align: center; }
+
+    /* Social links */
+    .header-social {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .social-btn {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 15px;
+      text-decoration: none;
+      transition: transform .2s;
+    }
+    .social-btn:hover { transform: scale(1.15); }
+    .social-btn.fb   { background: #e8f0fb; color: #1877f2; }
+    .social-btn.ig   { background: #fce8f0; color: #e1306c; }
+    .social-btn.yt   { background: #ffe8e8; color: #ff0000; }
+
+    /* Nav bar */
+    .nav-bar {
+      border-top: 1px solid var(--sand2);
+      display: flex;
+      align-items: center;
+      gap: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .nav-bar::-webkit-scrollbar { display: none; }
+    .nav-link {
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      white-space: nowrap;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      border-bottom: 3px solid transparent;
+      transition: color .2s, border-color .2s;
+    }
+    .nav-link:hover,
+    .nav-link.active {
+      color: var(--terracotta);
+      border-bottom-color: var(--terracotta);
+    }
+    .nav-link.cat-culture  { --c: var(--terracotta); }
+    .nav-link.cat-monuments{ --c: var(--ochre); }
+    .nav-link.cat-saveurs  { --c: var(--green); }
+    .nav-link.cat-vie      { --c: var(--sky); }
+    .nav-link.cat-evenements { --c: #e74c3c; }
+
+    /* ════════════════════════════════
+       HERO BANNER
+    ════════════════════════════════ */
+    .hero {
+      position: relative;
+      background: var(--dark);
+      min-height: 520px;
+      display: flex;
+      align-items: flex-end;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to right, rgba(26,18,8,.95) 0%, rgba(26,18,8,.5) 50%, rgba(26,18,8,.2) 100%),
+        repeating-linear-gradient(45deg, rgba(201,80,42,.04) 0, rgba(201,80,42,.04) 1px, transparent 1px, transparent 40px),
+        repeating-linear-gradient(-45deg, rgba(212,137,26,.03) 0, rgba(212,137,26,.03) 1px, transparent 1px, transparent 40px);
+      background-color: #3d2510;
+    }
+    /* Decorative circles */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,80,42,.15) 0%, transparent 70%);
+      right: -100px; top: -100px;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,137,26,.12) 0%, transparent 70%);
+      right: 200px; bottom: -50px;
+    }
+
+    /* Featured image placeholder */
+    .hero-img-placeholder {
+      position: absolute;
+      right: 0; top: 0; bottom: 0;
+      width: 55%;
+      background: linear-gradient(135deg, #5a3520 0%, #3d2510 50%, #2a1a08 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      color: rgba(255,255,255,.2);
+      border-left: 1px dashed rgba(201,80,42,.2);
+    }
+    .hero-img-placeholder svg { width: 56px; height: 56px; opacity: .3; }
+    .hero-img-placeholder p { font-size: 13px; text-align: center; line-height: 1.6; padding: 0 20px; }
+    /* To use a real image, replace .hero-img-placeholder with:
+       <img src="your-image.jpg" style="position:absolute;right:0;top:0;bottom:0;width:55%;object-fit:cover;opacity:.5"> */
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px 5vw 48px;
+      max-width: 560px;
+    }
+    .hero-cat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--terracotta);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 30px;
+      margin-bottom: 18px;
+    }
+    .hero-title {
+      font-family: var(--font-head);
+      font-size: clamp(28px, 5vw, 52px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--ochre);
+    }
+    .hero-excerpt {
+      font-size: 15px;
+      color: rgba(255,255,255,.65);
+      line-height: 1.7;
+      margin-bottom: 24px;
+      max-width: 440px;
+    }
+    .hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .author-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--terracotta), var(--ochre));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8); }
+    .author-date { font-size: 12px; color: rgba(255,255,255,.4); }
+    .hero-read-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--terracotta);
+      color: var(--white);
+      padding: 11px 22px;
+      border-radius: 30px;
+      font-weight: 700;
+      font-size: 13px;
+      text-decoration: none;
+      transition: background .2s, transform .15s;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-body);
+    }
+    .hero-read-btn:hover { background: var(--terracotta2); transform: translateY(-2px); }
+
+    /* ════════════════════════════════
+       TICKER
+    ════════════════════════════════ */
+    .ticker-wrap {
+      background: var(--terracotta);
+      overflow: hidden;
+      padding: 9px 0;
+    }
+    .ticker-inner {
+      display: flex;
+      gap: 0;
+      animation: ticker 30s linear infinite;
+      width: max-content;
+    }
+    .ticker-inner:hover { animation-play-state: paused; }
+    .ticker-item {
+      white-space: nowrap;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+      padding: 0 32px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ticker-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,.5); flex-shrink: 0; }
+    @keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ════════════════════════════════
+       CATEGORIES STRIP
+    ════════════════════════════════ */
+    .cat-strip {
+      padding: 40px 5vw 0;
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .cat-strip::-webkit-scrollbar { display: none; }
+    .cat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      border: 2px solid;
+      text-decoration: none;
+      transition: all .2s;
+      flex-shrink: 0;
+    }
+    .cat-pill:hover, .cat-pill.active {
+      color: var(--white) !important;
+    }
+    .cat-pill.all      { border-color: var(--terracotta); color: var(--terracotta); }
+    .cat-pill.all:hover,.cat-pill.all.active { background: var(--terracotta); }
+    .cat-pill.culture  { border-color: var(--terracotta); color: var(--terracotta); }
+    .cat-pill.culture:hover,.cat-pill.culture.active  { background: var(--terracotta); }
+    .cat-pill.monuments{ border-color: var(--ochre); color: var(--ochre); }
+    .cat-pill.monuments:hover,.cat-pill.monuments.active{ background: var(--ochre); }
+    .cat-pill.saveurs  { border-color: var(--green); color: var(--green); }
+    .cat-pill.saveurs:hover,.cat-pill.saveurs.active  { background: var(--green); }
+    .cat-pill.vie      { border-color: var(--sky); color: var(--sky); }
+    .cat-pill.vie:hover,.cat-pill.vie.active      { background: var(--sky); }
+    .cat-pill.evenements   { border-color: #e74c3c; color: #e74c3c; }
+    .cat-pill.evenements:hover,.cat-pill.evenements.active{ background: #e74c3c; }
+
+    /* ════════════════════════════════
+       ARTICLES GRID
+    ════════════════════════════════ */
+    .section-wrap {
+      padding: 40px 5vw 60px;
+    }
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+    .section-label h2 {
+      font-family: var(--font-head);
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 900;
+      color: var(--dark);
+    }
+    .section-label-line {
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(to right, var(--sand2), transparent);
+    }
+    .section-label-accent {
+      font-family: var(--font-accent);
+      font-size: 16px;
+      color: var(--terracotta);
+    }
+
+    /* Grid layout */
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .articles-grid .card:first-child {
+      grid-column: span 2;
+    }
+
+    /* Article card */
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid var(--sand2);
+      transition: transform .25s, box-shadow .25s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 50px rgba(26,18,8,.12);
+    }
+    .card-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--sand) 0%, var(--sand2) 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .card-img img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card-img-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      opacity: .5;
+      pointer-events: none;
+    }
+    .card-img-placeholder svg { width: 32px; height: 32px; }
+    .card-img-placeholder span { font-size: 11px; }
+    .card-cat-tag {
+      position: absolute;
+      top: 12px; left: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      color: var(--white);
+    }
+    .card-cat-tag.culture   { background: var(--terracotta); }
+    .card-cat-tag.monuments { background: var(--ochre); }
+    .card-cat-tag.saveurs   { background: var(--green); }
+    .card-cat-tag.vie       { background: var(--sky); }
+    .card-cat-tag.evenements { background: #e74c3c; }
+
+    .card-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+    .card-title {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+      margin-bottom: 10px;
+      transition: color .2s;
+    }
+    .card:hover .card-title { color: var(--terracotta); }
+    .card-excerpt {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-bottom: 16px;
+      flex: 1;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--sand2);
+    }
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card-avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .card-author { font-size: 12px; font-weight: 600; color: var(--text); }
+    .card-date   { font-size: 11px; color: var(--muted); }
+    .card-stats {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .card-stat { display: flex; align-items: center; gap: 4px; }
+
+    /* Read more button inside card */
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--terracotta);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: var(--font-body);
+      transition: gap .2s;
+    }
+    .read-more-btn:hover { gap: 10px; }
+
+    /* ════════════════════════════════
+       SIDEBAR
+    ════════════════════════════════ */
+    .main-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      padding: 0 5vw 60px;
+      align-items: start;
+    }
+
+    .sidebar { display: flex; flex-direction: column; gap: 28px; }
+
+    .sidebar-widget {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--sand2);
+      overflow: hidden;
+    }
+    .widget-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--sand2);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .widget-head h3 {
+      font-family: var(--font-head);
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .widget-head-icon { font-size: 18px; }
+
+    /* À propos widget */
+    .about-widget-body {
+      padding: 20px;
+      text-align: center;
+    }
+    .about-logo {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--terracotta);
+      margin-bottom: 8px;
+    }
+    .about-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .about-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+    }
+    .about-tag {
+      font-size: 11px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1px solid var(--sand2);
+      color: var(--muted);
+    }
+
+    /* Trending widget */
+    .trending-list { padding: 4px 0; }
+    .trending-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--sand2);
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .trending-item:last-child { border-bottom: none; }
+    .trending-item:hover { background: var(--sand); }
+    .trending-num {
+      font-family: var(--font-head);
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--sand2);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 28px;
+    }
+    .trending-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .trending-meta { font-size: 11px; color: var(--muted); }
+
+    /* Newsletter widget */
+    .newsletter-widget {
+      background: linear-gradient(135deg, var(--terracotta) 0%, #a03a18 100%);
+      border-color: transparent;
+    }
+    .newsletter-widget .widget-head {
+      border-bottom-color: rgba(255,255,255,.15);
+    }
+    .newsletter-widget .widget-head h3 { color: var(--white); }
+    .newsletter-body {
+      padding: 20px;
+    }
+    .newsletter-desc {
+      font-size: 13px;
+      color: rgba(255,255,255,.75);
+      line-height: 1.65;
+      margin-bottom: 16px;
+    }
+    .newsletter-form { display: flex; flex-direction: column; gap: 10px; }
+    .newsletter-input {
+      padding: 11px 16px;
+      border-radius: 10px;
+      border: none;
+      font-family: var(--font-body);
+      font-size: 13px;
+      background: rgba(255,255,255,.15);
+      color: var(--white);
+      outline: none;
+    }
+    .newsletter-input::placeholder { color: rgba(255,255,255,.5); }
+    .newsletter-input:focus { background: rgba(255,255,255,.2); }
+    .newsletter-btn {
+      padding: 11px;
+      border-radius: 10px;
+      border: none;
+      background: var(--white);
+      color: var(--terracotta);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .newsletter-btn:hover { background: var(--sand); transform: translateY(-1px); }
+
+    /* Tags cloud widget */
+    .tags-cloud {
+      padding: 16px 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag-chip {
+      font-size: 12px;
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: var(--sand);
+      color: var(--muted);
+      border: 1px solid var(--sand2);
+      cursor: pointer;
+      transition: all .2s;
+      text-decoration: none;
+    }
+    .tag-chip:hover { background: var(--terracotta); color: var(--white); border-color: var(--terracotta); }
+
+    /* ════════════════════════════════
+       FEATURED SECTION — full width
+    ════════════════════════════════ */
+    .featured-strip {
+      background: var(--dark);
+      padding: 60px 5vw;
+      position: relative;
+      overflow: hidden;
+    }
+    .featured-strip::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 10% 50%, rgba(201,80,42,.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 90% 50%, rgba(212,137,26,.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .featured-strip .section-label h2 { color: var(--white); }
+    .featured-strip .section-label-accent { color: var(--sand); }
+
+    .featured-scroll {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding-bottom: 8px;
+      cursor: grab;
+    }
+    .featured-scroll::-webkit-scrollbar { display: none; }
+    .featured-scroll:active { cursor: grabbing; }
+
+    .featured-card {
+      flex-shrink: 0;
+      width: 280px;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+      overflow: hidden;
+      transition: transform .25s, border-color .25s;
+      cursor: pointer;
+    }
+    .featured-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(201,80,42,.4);
+    }
+    .featured-card-img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, rgba(201,80,42,.15) 0%, rgba(26,18,8,.8) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .featured-card-img-ph {
+      text-align: center;
+      color: rgba(255,255,255,.2);
+      font-size: 12px;
+      padding: 16px;
+      line-height: 1.5;
+    }
+    .featured-card-body { padding: 16px; }
+    .featured-card-cat {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--ochre);
+      margin-bottom: 6px;
+    }
+    .featured-card-title {
+      font-family: var(--font-head);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .featured-card-meta { font-size: 11px; color: rgba(255,255,255,.4); }
+
+    /* ════════════════════════════════
+       ARTICLE MODAL (Lire l'article)
+    ════════════════════════════════ */
+    .article-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,.85);
+      backdrop-filter: blur(8px);
+      z-index: 500;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
+      overflow-y: auto;
+    }
+    .article-overlay.open { opacity: 1; pointer-events: all; }
+
+    .article-modal {
+      width: 100%;
+      max-width: 720px;
+      background: var(--cream);
+      border-radius: 24px;
+      overflow: hidden;
+      transform: translateY(30px);
+      transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+    }
+    .article-overlay.open .article-modal { transform: translateY(0); }
+
+    .article-modal-header {
+      background: var(--dark);
+      padding: 28px 32px 24px;
+      position: relative;
+    }
+    .article-modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.1);
+      border: none;
+      border-radius: 50%;
+      color: rgba(255,255,255,.6);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .article-modal-close:hover { background: rgba(201,80,42,.4); color: white; }
+
+    .article-modal-cat {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      color: white;
+    }
+    .article-modal-title {
+      font-family: var(--font-head);
+      font-size: clamp(20px, 4vw, 30px);
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .article-modal-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .article-modal-author {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-modal-date { font-size: 12px; color: rgba(255,255,255,.4); }
+
+    .article-modal-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, var(--sand) 0%, var(--sand2) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 13px;
+      text-align: center;
+      gap: 10px;
+    }
+
+    .article-modal-body {
+      padding: 32px;
+    }
+    .article-modal-body p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .article-modal-body blockquote {
+      border-left: 4px solid var(--terracotta);
+      padding: 12px 20px;
+      background: rgba(201,80,42,.06);
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      font-size: 17px;
+      color: var(--terracotta);
+      margin: 24px 0;
+      font-family: var(--font-head);
+    }
+    .article-modal-body h3 {
+      font-family: var(--font-head);
+      font-size: 20px;
+      color: var(--dark);
+      margin: 28px 0 12px;
+    }
+
+    /* Comments section */
+    .comments-section {
+      padding: 0 32px 32px;
+      border-top: 2px solid var(--sand2);
+    }
+    .comments-title {
+      font-family: var(--font-head);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      padding: 20px 0 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .comments-count {
+      background: var(--terracotta);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-family: var(--font-body);
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .comment-avatar {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+    .comment-content {
+      flex: 1;
+      background: var(--sand);
+      border-radius: 0 14px 14px 14px;
+      padding: 12px 16px;
+    }
+    .comment-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+    .comment-name { font-size: 13px; font-weight: 700; color: var(--dark); }
+    .comment-time { font-size: 11px; color: var(--muted); }
+    .comment-text { font-size: 14px; color: var(--text); line-height: 1.6; }
+
+    .comment-form { margin-top: 20px; }
+    .comment-form-title { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 12px; }
+    .comment-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+    .comment-input, .comment-textarea {
+      padding: 11px 16px;
+      border: 1.5px solid var(--sand2);
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      background: var(--white);
+      color: var(--text);
+      outline: none;
+      transition: border-color .2s;
+    }
+    .comment-input:focus, .comment-textarea:focus { border-color: var(--terracotta); }
+    .comment-textarea { width: 100%; resize: vertical; min-height: 90px; }
+    .comment-submit {
+      margin-top: 10px;
+      padding: 11px 24px;
+      background: var(--terracotta);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .comment-submit:hover { background: var(--terracotta2); }
+
+    /* ════════════════════════════════
+       FOOTER
+    ════════════════════════════════ */
+    footer {
+      background: var(--dark2);
+      color: rgba(255,255,255,.6);
+      padding: 48px 5vw 28px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 32px;
+    }
+    .footer-brand .logo-main { color: var(--white); margin-bottom: 10px; }
+    .footer-brand .logo-accent { color: var(--ochre); }
+    .footer-brand p { font-size: 13px; line-height: 1.7; color: rgba(255,255,255,.5); }
+    .footer-col h4 { font-family: var(--font-head); font-size: 15px; color: var(--white); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col ul li a {
+      font-size: 13px;
+      color: rgba(255,255,255,.5);
+      text-decoration: none;
+      transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--ochre); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: 12px; }
+    .footer-bottom a { color: var(--ochre); text-decoration: none; }
+
+    /* ════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════ */
+    @media (max-width: 900px) {
+      .articles-grid { grid-template-columns: 1fr; }
+      .articles-grid .card:first-child { grid-column: span 1; }
+      .main-layout { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .hero-img-placeholder { display: none; }
+      .comment-inputs { grid-template-columns: 1fr; }
+      .search-wrap { width: 160px; }
+    }
+    @media (max-width: 600px) {
+      .header-social { display: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 40px 5vw 36px; }
+
+      /* Header mobile : logo centré en ligne 1, contrôles en ligne 2 */
+      .header-top {
+        flex-wrap: wrap;
+        padding: 10px 0;
+        gap: 8px;
+      }
+      .logo-block {
+        width: 100%;
+        order: 0;
+        flex: unset;
+      }
+      .search-wrap {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+        order: 1;
+      }
+      .lang-toggle {
+        order: 2;
+        flex-shrink: 0;
+      }
+      .contact-nav-btn {
+        order: 3;
+        flex-shrink: 0;
+        font-size: 12px;
+        padding: 7px 12px;
+      }
+      /* Google Translate widget mobile */
+      .gt-wrap { order: 2; }
+    }
+
+    /* ════════════════════════════════
+       ANIMATIONS
+    ════════════════════════════════ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity .5s ease, transform .5s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* No results message */
+    .no-results {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+      display: none;
+    }
+    .no-results svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: .4; }
+    .no-results p { font-size: 15px; }
+
+    /* ════════════════════════════════
+       CONTACT MODAL
+    ════════════════════════════════ */
+    .contact-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,.55);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+      padding: 20px;
+    }
+    .contact-overlay.open { opacity: 1; pointer-events: all; }
+    .contact-modal {
+      background: var(--cream);
+      border-radius: 24px;
+      width: 100%; max-width: 520px;
+      padding: 40px;
+      position: relative;
+      transform: translateY(20px);
+      transition: transform .3s;
+      box-shadow: 0 40px 80px rgba(0,0,0,.25);
+    }
+    .contact-overlay.open .contact-modal { transform: none; }
+    .contact-modal-close {
+      position: absolute; top: 16px; right: 16px;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: none; background: var(--sand2);
+      font-size: 16px; cursor: pointer; display: flex;
+      align-items: center; justify-content: center;
+      color: var(--muted);
+    }
+    .contact-modal h2 {
+      font-family: var(--font-head);
+      font-size: 24px; color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .contact-modal .contact-subtitle {
+      font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.6;
+    }
+    .contact-options {
+      display: flex; flex-direction: column; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .contact-option {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 20px; border-radius: 14px;
+      text-decoration: none; color: var(--dark);
+      border: 1.5px solid var(--sand2);
+      transition: all .2s; font-size: 14px;
+      background: white;
+    }
+    .contact-option:hover { border-color: var(--terracotta); background: #fdf3ee; }
+    .contact-option-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; flex-shrink: 0;
+    }
+    .contact-option-icon.email-icon { background: #fce8e0; }
+    .contact-option-icon.wa-icon    { background: #e6f7ee; }
+    .contact-option strong { display: block; font-weight: 600; margin-bottom: 2px; }
+    .contact-option span   { font-size: 12px; color: var(--muted); }
+    .contact-divider {
+      text-align: center; font-size: 12px; color: var(--muted);
+      margin: 0 0 20px; position: relative;
+    }
+    .contact-divider::before, .contact-divider::after {
+      content: ''; position: absolute; top: 50%;
+      width: 40%; height: 1px; background: var(--sand2);
+    }
+    .contact-divider::before { left: 0; }
+    .contact-divider::after  { right: 0; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 11px 14px;
+      border: 1.5px solid var(--sand2); border-radius: 10px;
+      font-family: var(--font-body); font-size: 14px;
+      background: white; color: var(--dark);
+      outline: none; transition: border-color .2s;
+      margin-bottom: 12px;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { border-color: var(--terracotta); }
+    .contact-form textarea { min-height: 90px; resize: vertical; }
+    .contact-form-btn {
+      width: 100%; padding: 13px;
+      background: var(--terracotta); color: white;
+      border: none; border-radius: 10px;
+      font-weight: 700; font-size: 14px;
+      cursor: pointer; transition: background .2s;
+      font-family: var(--font-body);
+    }
+    .contact-form-btn:hover { background: var(--terracotta2); }
+
+    /* Bouton contact flottant nav */
+    .contact-nav-btn {
+      padding: 7px 18px; border-radius: 20px;
+      background: var(--terracotta); color: white;
+      border: none; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background .2s;
+      font-family: var(--font-body); white-space: nowrap;
+    }
+    .contact-nav-btn:hover { background: var(--terracotta2); }
+
+    /* ════════════════════════════════
+       GOOGLE TRANSLATE WIDGET
+    ════════════════════════════════ */
+    .gt-wrap {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    /* Masquer la bannière Google Translate */
+    .goog-te-banner-frame, .skiptranslate iframe { display: none !important; }
+    body { top: 0 !important; }
+    /* Styliser le select Google Translate */
+    .goog-te-gadget {
+      font-family: var(--font-body) !important;
+      font-size: 12px !important;
+      color: var(--muted) !important;
+    }
+    .goog-te-gadget .goog-te-gadget-simple {
+      background: var(--sand2);
+      border: 1.5px solid rgba(0,0,0,.08) !important;
+      border-radius: 20px !important;
+      padding: 5px 10px !important;
+      font-size: 12px !important;
+      font-family: var(--font-body) !important;
+      color: var(--text) !important;
+      cursor: pointer;
+    }
+    .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed {
+      color: var(--text) !important;
+    }
+    .goog-te-gadget-simple img { display: none !important; }
+    .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span { padding: 0 !important; }
+    /* Cacher le logo "Google Translate" */
+    .goog-te-gadget > span { display: none !important; }
+  </style>
+
+  <!-- Google Translate API -->
+  <script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({
+        pageLanguage: 'fr',
+        includedLanguages: 'fr,en,ar,ha,de,es,zh-CN',
+        layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+        autoDisplay: false
+      }, 'google_translate_element');
+    }
+  </script>
+  <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</head>
+<body>
+
+<!-- ════ HEADER ═══════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="header-top">
+
+    <!-- Logo -->
+    <div class="logo-block">
+      <div class="logo-main"> <img src="images/LOGO.jpg" alt=""></div>
+      <span class="logo-sub">Culture · Monuments · Vie Locale</span>
+    </div>
+
+    <!-- Search -->
+    <div class="search-wrap">
+      <span class="search-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </span>
+      <input type="text" class="search-input" id="searchInput" placeholder="Rechercher…" autocomplete="off"/>
+      <div class="search-results" id="searchResults"></div>
+    </div>
+
+    <!-- Google Translate -->
+    <div class="gt-wrap">
+      <div id="google_translate_element"></div>
+    </div>
+
+    <!-- Contact -->
+    <button class="contact-nav-btn" onclick="openContact()">✉ Nous contacter</button>
+
+  </div>
+
+  <!-- Nav -->
+  <nav class="nav-bar">
+    <a href="#" class="nav-link active" data-cat="all">🏠 Accueil</a>
+    <a href="#" class="nav-link cat-culture"   data-cat="culture">🎭 Culture</a>
+    <a href="#" class="nav-link cat-monuments" data-cat="monuments">🏛 Monuments</a>
+    <a href="#" class="nav-link cat-saveurs"   data-cat="saveurs">🍽 Saveurs</a>
+    <a href="#" class="nav-link cat-vie"       data-cat="vie">🌆 Vie Locale</a>
+    <a href="#" class="nav-link cat-evenements"      data-cat="evenements">📅 Événements</a>
+    <a href="#" class="nav-link"               data-cat="all">📷 Galerie</a>
+  </nav>
+</header>
+
+<!-- ════ TICKER ═══════════════════════════════════════════════════ -->
+<div class="ticker-wrap">
+  <div class="ticker-inner" id="ticker">
+    <span class="ticker-item"><span class="ticker-dot"></span>Garoua, capitale économique du Nord Cameroun</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Festival des Arts et de la Culture de Garoua — chaque année</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Le fleuve Bénoué, joyau naturel de la région</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Artisanat local : broderie, poterie, cuir tanné</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Garoua, ville de convergence des peuples du Nord</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>La mosquée centrale de Garoua, chef-d'œuvre architectural</span>
+    <!-- Duplication pour scroll infini -->
+    <span class="ticker-item"><span class="ticker-dot"></span>Garoua, capitale économique du Nord Cameroun</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Festival des Arts et de la Culture de Garoua — chaque année</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Le fleuve Bénoué, joyau naturel de la région</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Artisanat local : broderie, poterie, cuir tanné</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Garoua, ville de convergence des peuples du Nord</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>La mosquée centrale de Garoua, chef-d'œuvre architectural</span>
+  </div>
+</div>
+
+<!-- ════ HERO ══════════════════════════════════════════════════════ -->
+<section class="hero" id="heroSection">
+  <div class="hero-bg"></div>
+  <div class="hero-img-placeholder" id="heroBg">
+    <img src="images\Garoua.jpg" alt="vue aerienne">
+  </div>
+  <div class="hero-content" id="heroContent">
+    <!-- Rempli dynamiquement par renderHero() -->
+    <div class="hero-cat-badge">🏛 À la une</div>
+    <h1 class="hero-title" id="heroTitle">Chargement…</h1>
+    <p class="hero-excerpt" id="heroExcerpt"></p>
+    <div class="hero-meta">
+      <div class="hero-author">
+        <div class="author-avatar" id="heroAuthorInit">?</div>
+        <div>
+          <div class="author-name" id="heroAuthorName"></div>
+          <div class="author-date"  id="heroDate"></div>
+        </div>
+      </div>
+      <button class="hero-read-btn" id="heroReadBtn" onclick="">Lire l'article →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════ CATÉGORIES ═══════════════════════════════════════════════ -->
+<div class="cat-strip">
+  <a class="cat-pill all active"       href="#" data-filter="all">🗂 Tous</a>
+  <a class="cat-pill culture"          href="#" data-filter="culture">🎭 Culture</a>
+  <a class="cat-pill monuments"        href="#" data-filter="monuments">🏛 Monuments</a>
+  <a class="cat-pill saveurs"          href="#" data-filter="saveurs">🍽 Saveurs</a>
+  <a class="cat-pill vie"              href="#" data-filter="vie">🌆 Vie Locale</a>
+  <a class="cat-pill evenements"          href="#" data-filter="evenements">📅 Événements</a>
+</div>
+
+<!-- ════ ARTICLES GRID ════════════════════════════════════════════ -->
+<div class="section-wrap">
+  <div class="section-label">
+    <h2>Articles récents</h2>
+    <div class="section-label-line"></div>
+    <span class="section-label-accent">Découvrir</span>
+  </div>
+
+  <div class="articles-grid" id="articlesGrid">
+    <!-- Cards injected by JS -->
+  </div>
+  <div class="no-results" id="noResults">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <p>Aucun article trouvé pour cette catégorie.</p>
+  </div>
+</div>
+
+<!-- ════ MAIN LAYOUT (Articles + Sidebar) ════════════════════════ -->
+<div class="main-layout">
+
+  <!-- More articles -->
+  <div>
+    <div class="section-label">
+      <h2>À explorer</h2>
+      <div class="section-label-line"></div>
+    </div>
+    <div id="extraGrid" style="display:grid;gap:20px;"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+
+    <!-- À propos -->
+    <div class="sidebar-widget">
+      <div class="widget-head">
+        <span class="widget-head-icon">✨</span>
+        <h3>À propos du blog</h3>
+      </div>
+      <div class="about-widget-body">
+        <div class="about-logo">Djawleerou Garoua</div>
+        <p class="about-desc">Un espace dédié à la beauté, la richesse culturelle et le dynamisme de Garoua — la perle du Nord Cameroun. Monuments, cuisine, traditions, visages…</p>
+        <div class="about-tags">
+          <span class="about-tag">🕌 Monuments</span>
+          <span class="about-tag">🎭 Culture</span>
+          <span class="about-tag">🍲 Cuisine</span>
+          <span class="about-tag">📸 Photographie</span>
+          <span class="about-tag">🌊 Bénoué</span>
+          <span class="about-tag">🎶 Musique</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tendances -->
+    <div class="sidebar-widget">
+      <div class="widget-head">
+        <span class="widget-head-icon">🔥</span>
+        <h3>Tendances</h3>
+      </div>
+      <div class="trending-list" id="trendingList"></div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="sidebar-widget newsletter-widget">
+      <div class="widget-head">
+        <span class="widget-head-icon">📩</span>
+        <h3 style="color:white">Newsletter</h3>
+      </div>
+      <div class="newsletter-body">
+        <p class="newsletter-desc">Recevez les meilleures histoires de Garoua directement dans votre boîte mail. Gratuit, sans spam.</p>
+        <div class="newsletter-form">
+          <input type="text"  class="newsletter-input" id="newsletterName"  placeholder="Votre prénom"/>
+          <input type="email" class="newsletter-input" id="newsletterEmail" placeholder="Votre email"/>
+          <button class="newsletter-btn" onclick="subscribeNewsletter(this)">Je m'abonne ✓</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="sidebar-widget">
+      <div class="widget-head">
+        <span class="widget-head-icon">🏷</span>
+        <h3>Tags populaires</h3>
+      </div>
+      <div class="tags-cloud">
+        <a class="tag-chip" href="#">#Garoua</a>
+        <a class="tag-chip" href="#">#Bénoué</a>
+        <a class="tag-chip" href="#">#NordCameroun</a>
+        <a class="tag-chip" href="#">#Culture</a>
+        <a class="tag-chip" href="#">#Mosquée</a>
+        <a class="tag-chip" href="#">#Artisanat</a>
+        <a class="tag-chip" href="#">#GrandMarché</a>
+        <a class="tag-chip" href="#">#Fêtes</a>
+        <a class="tag-chip" href="#">#Cuisine</a>
+        <a class="tag-chip" href="#">#Tradition</a>
+        <a class="tag-chip" href="#">#Voyage</a>
+        <a class="tag-chip" href="#">#Photographie</a>
+        <a class="tag-chip" href="#">#Architecture</a>
+        <a class="tag-chip" href="#">#Musique</a>
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ════ FEATURED DARK STRIP ══════════════════════════════════════ -->
+<section class="featured-strip">
+  <div class="section-label" style="margin-bottom:28px;">
+    <h2>Monuments & Patrimoine</h2>
+    <div class="section-label-line" style="background:linear-gradient(to right,rgba(255,255,255,.15),transparent)"></div>
+    <span class="section-label-accent" style="color:var(--sand)">Garoua éternelle</span>
+  </div>
+  <div class="featured-scroll" id="featuredScroll"></div>
+</section>
+
+<!-- ════ FOOTER ═══════════════════════════════════════════════════ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="logo-accent">✦ Le blog de</span>
+      <div class="logo-main">Djawleerou <span>Garoua</span></div>
+      <p style="margin-top:12px">Célébrer la beauté, la culture et l'âme de Garoua à travers des histoires authentiques et des regards locaux sur notre ville du Nord.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Catégories</h4>
+      <ul>
+        <li><a href="#">🎭 Culture & Arts</a></li>
+        <li><a href="#">🏛 Monuments</a></li>
+        <li><a href="#">🍽 Saveurs locales</a></li>
+        <li><a href="#">🌆 Vie Locale</a></li>
+        <li><a href="#">📅 Événements</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Le blog</h4>
+      <ul>
+        <li><a href="#">À propos</a></li>
+        <li><a href="#">Contribuer</a></li>
+        <li><a href="#" onclick="openContact();return false;">Contact</a></li>
+        <li><a href="#">Politique de confidentialité</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <a href="#">Djawleerou Garoua</a>. Fait avec ❤ à Garoua, Cameroun.</p>
+    <p>Tous les droits sont réservés.</p>
+  </div>
+</footer>
+
+<!-- ════ ARTICLE MODAL ════════════════════════════════════════════ -->
+<div class="article-overlay" id="articleOverlay">
+  <div class="article-modal">
+
+    <div class="article-modal-header">
+      <button class="article-modal-close" onclick="closeArticle()">✕</button>
+      <div class="article-modal-cat" id="modalCat"></div>
+      <div class="article-modal-title" id="modalTitle"></div>
+      <div class="article-modal-meta">
+        <div class="article-modal-author">
+          <div class="card-avatar" id="modalAvatar" style="width:32px;height:32px;font-size:12px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;"></div>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:white;" id="modalAuthor"></div>
+            <div class="article-modal-date" id="modalDate"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-modal-img" id="modalImg">
+      <div style="text-align:center;opacity:.5;">
+        <div style="font-size:32px;margin-bottom:8px;">📷</div>
+        <div style="font-size:13px;">Photo à ajouter</div>
+      </div>
+    </div>
+
+    <div class="article-modal-body" id="modalBody"></div>
+
+    <div class="comments-section">
+      <div class="comments-title">
+        Commentaires
+        <span class="comments-count" id="commentsCount">0</span>
+      </div>
+      <div id="commentsList"></div>
+      <div class="comment-form">
+        <div class="comment-form-title">Laisser un commentaire</div>
+        <div class="comment-inputs">
+          <input type="text"  class="comment-input" id="commentName"  placeholder="Votre nom *"/>
+          <input type="email" class="comment-input" id="commentEmail" placeholder="Email (optionnel)"/>
+        </div>
+        <textarea class="comment-textarea" id="commentText" placeholder="Votre commentaire…"></textarea>
+        <button class="comment-submit" onclick="submitComment()">Publier le commentaire</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ CONTACT MODAL ════════════════════════════════════════════ -->
+<div class="contact-overlay" id="contactOverlay" onclick="handleContactOverlayClick(event)">
+  <div class="contact-modal">
+    <button class="contact-modal-close" onclick="closeContact()">✕</button>
+    <h2>📬 Nous contacter</h2>
+    <p class="contact-subtitle">Vous avez une annonce à passer, une histoire à partager ou une suggestion pour Djawleerou Garoua ? On vous répond rapidement.</p>
+
+    <div class="contact-options">
+      <a class="contact-option" href="https://wa.me/237650424112" target="_blank" rel="noopener">
+        <div class="contact-option-icon wa-icon">💬</div>
+        <div>
+          <strong>WhatsApp</strong>
+          <span>+237 650 424 112 — Réponse rapide</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-divider">ou envoyez-nous un message</div>
+
+    <div class="contact-form" id="contactForm">
+      <input type="text"  id="cfName"    placeholder="Votre nom *"/>
+      <input type="email" id="cfEmail"   placeholder="Votre email *"/>
+      <input type="text"  id="cfSubject" placeholder="Objet (ex: Annonce, Partenariat, Article…)"/>
+      <textarea           id="cfMessage" placeholder="Votre message…"></textarea>
+      <button class="contact-form-btn" onclick="sendContactForm()">Envoyer le message →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+// STATE
+// ══════════════════════════════════════════════════════════════
+let articles       = [];
+let commentsState  = {};   // { articleId: [comment, ...] }
+let currentArticleId = null;
+let currentFilter    = 'all';
+
+// ══════════════════════════════════════════════════════════════
+// API HELPERS
+// ══════════════════════════════════════════════════════════════
+async function apiFetch(url) {
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Erreur ${res.status}`);
+  return res.json();
+}
+async function apiPost(url, body) {
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  });
+  return res.json();
+}
+
+// ══════════════════════════════════════════════════════════════
+// NORMALIZE — adapte les champs API au format attendu par le rendu
+// ══════════════════════════════════════════════════════════════
+function normalizeArticle(a) {
+  const colors = { culture:'#c9502a', monuments:'#d4891a', saveurs:'#2d7a4f', vie:'#3b82c4', evenements:'#e74c3c' };
+  return {
+    id:          a.id,
+    cat:         a.category,
+    catLabel:    a.catLabel,
+    title:       a.title,
+    excerpt:     a.excerpt,
+    body:        a.content,
+    author:      a.author,
+    authorInit:  (a.author || 'R')[0].toUpperCase(),
+    authorColor: colors[a.category] || '#c9502a',
+    date:        new Date(a.createdAt).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' }),
+    views:       a.views >= 1000 ? (a.views/1000).toFixed(1)+'k' : String(a.views || 0),
+    img:         a.img || '',
+    featured:    a.featured || false,
+    comments:    (a.comments || []).map(normalizeComment)
+  };
+}
+function normalizeComment(c) {
+  const avatarColors = ['#c9502a','#d4891a','#2d7a4f','#3b82c4','#9b59b6'];
+  const color = avatarColors[Math.abs([...c.name].reduce((h,ch)=>ch.charCodeAt(0)+((h<<5)-h),0)) % avatarColors.length];
+  return {
+    id:    c.id,
+    name:  c.name,
+    init:  c.name[0].toUpperCase(),
+    color: color,
+    time:  timeAgo(c.createdAt),
+    text:  c.text
+  };
+}
+function timeAgo(iso) {
+  const diff = (Date.now() - new Date(iso)) / 1000;
+  if (diff < 3600)   return `Il y a ${Math.round(diff/60)} min`;
+  if (diff < 86400)  return `Il y a ${Math.round(diff/3600)}h`;
+  if (diff < 604800) return `Il y a ${Math.round(diff/86400)} jours`;
+  return new Date(iso).toLocaleDateString('fr-FR');
+}
+
+// ══════════════════════════════════════════════════════════════
+// ══════════════════════════════════════════════════════════════
+// RENDER HERO — article à la une (featured ou premier publié)
+// ══════════════════════════════════════════════════════════════
+function renderHero(articleList) {
+  // Priorité : article marqué featured, sinon le premier de la liste
+  const a = articleList.find(x => x.featured) || articleList[0];
+  if (!a) return;
+
+  document.getElementById('heroTitle').textContent   = a.title;
+  document.getElementById('heroExcerpt').textContent = a.excerpt;
+  document.getElementById('heroAuthorName').textContent = a.author;
+  document.getElementById('heroDate').textContent    = a.date;
+  document.getElementById('heroAuthorInit').textContent = a.authorInit;
+  document.getElementById('heroAuthorInit').style.background = a.authorColor;
+  document.getElementById('heroReadBtn').onclick = () => openArticle(a.id);
+
+  // Image de couverture dans le hero si disponible
+  if (a.img) {
+    const heroBg = document.getElementById('heroBg');
+    heroBg.innerHTML = `<img src="${a.img}" alt="${a.title}" style="width:100%;height:100%;object-fit:cover;opacity:.55;">`;
+  }
+}
+
+// LOAD ARTICLES
+// ══════════════════════════════════════════════════════════════
+async function loadArticles(filter = 'all') {
+  try {
+    const url   = filter === 'all' ? '/api/articles' : `/api/articles?category=${filter}`;
+    const raw   = await apiFetch(url);
+    articles    = raw.map(normalizeArticle);
+    // init commentsState from what we have
+    articles.forEach(a => { commentsState[a.id] = a.comments || []; });
+    // Render hero uniquement sur le chargement initial (all)
+    if (filter === 'all') renderHero(articles);
+    renderGrid(filter);
+    renderFeatured();
+    renderTrending();
+    setTimeout(observeCards, 100);
+  } catch(e) {
+    console.error('Erreur chargement articles:', e);
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// RENDER CARDS
+// ══════════════════════════════════════════════════════════════
+function catClass(cat) {
+  return { culture:'culture', monuments:'monuments', saveurs:'saveurs', vie:'vie', evenements:'evenements' }[cat] || 'culture';
+}
+
+function renderCard(article) {
+  const c = catClass(article.cat);
+  const imgHtml = article.img
+    ? `<img src="${article.img}" alt="${article.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`
+    : `<div class="card-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à ajouter</span></div>`;
+  const commCount = (commentsState[article.id] || []).length;
+  return `
+  <div class="card fade-in" data-id="${article.id}" data-cat="${article.cat}" onclick="openArticle(${article.id})">
+    <div class="card-img">${imgHtml}<span class="card-cat-tag ${c}">${article.catLabel}</span></div>
+    <div class="card-body">
+      <div class="card-title">${article.title}</div>
+      <div class="card-excerpt">${article.excerpt}</div>
+      <div class="card-footer">
+        <div class="card-meta">
+          <div class="card-avatar" style="background:${article.authorColor}">${article.authorInit}</div>
+          <div>
+            <div class="card-author">${article.author}</div>
+            <div class="card-date">${article.date}</div>
+          </div>
+        </div>
+        <div class="card-stats">
+          <span class="card-stat">👁 ${article.views}</span>
+          <span class="card-stat">💬 ${commCount}</span>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderGrid(filter = 'all') {
+  currentFilter = filter;
+  const filtered = filter === 'all' ? articles : articles.filter(a => a.cat === filter);
+  const grid  = document.getElementById('articlesGrid');
+  const noRes = document.getElementById('noResults');
+  const extra = document.getElementById('extraGrid');
+  if (filtered.length === 0) { grid.innerHTML = ''; extra.innerHTML = ''; noRes.style.display = 'block'; return; }
+  noRes.style.display = 'none';
+  grid.innerHTML  = filtered.slice(0, 3).map(a => renderCard(a)).join('');
+  extra.innerHTML = filtered.slice(3).map(a => renderCard(a)).join('');
+  setTimeout(() => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')), 50);
+}
+
+function renderFeatured() {
+  const strip = document.getElementById('featuredScroll');
+  const list  = [...articles.filter(a => a.cat === 'monuments'), ...articles.filter(a => a.cat !== 'monuments').slice(0, 4)];
+  strip.innerHTML = list.map(a => `
+    <div class="featured-card" onclick="openArticle(${a.id})">
+      <div class="featured-card-img">
+        ${a.img ? `<img src="${a.img}" style="width:100%;height:100%;object-fit:cover;">` : `<div class="featured-card-img-ph">📷<br>Photo à ajouter<br><small>${a.title.slice(0,25)}…</small></div>`}
+      </div>
+      <div class="featured-card-body">
+        <div class="featured-card-cat">${a.catLabel}</div>
+        <div class="featured-card-title">${a.title}</div>
+        <div class="featured-card-meta">👁 ${a.views} · ${a.date}</div>
+      </div>
+    </div>`).join('');
+}
+
+function renderTrending() {
+  const sorted = [...articles].sort((a, b) => parseFloat(b.views) - parseFloat(a.views)).slice(0, 4);
+  document.getElementById('trendingList').innerHTML = sorted.map((a, i) => `
+    <div class="trending-item" onclick="openArticle(${a.id})">
+      <div class="trending-num">0${i+1}</div>
+      <div>
+        <div class="trending-title">${a.title}</div>
+        <div class="trending-meta">${a.catLabel} · ${a.date}</div>
+      </div>
+    </div>`).join('');
+}
+
+// ══════════════════════════════════════════════════════════════
+// ARTICLE MODAL
+// ══════════════════════════════════════════════════════════════
+async function openArticle(id) {
+  try {
+    const raw = await apiFetch(`/api/articles/${id}`);
+    const a   = normalizeArticle(raw);
+    commentsState[a.id] = a.comments;
+    currentArticleId    = a.id;
+
+    const catColors = { culture:'#c9502a', monuments:'#d4891a', saveurs:'#2d7a4f', vie:'#3b82c4', evenements:'#e74c3c' };
+    document.getElementById('modalCat').textContent   = a.catLabel;
+    document.getElementById('modalCat').style.background = catColors[a.cat] || '#c9502a';
+    document.getElementById('modalTitle').textContent = a.title;
+    document.getElementById('modalAuthor').textContent = a.author;
+    document.getElementById('modalDate').textContent  = a.date;
+    document.getElementById('modalAvatar').textContent = a.authorInit;
+    document.getElementById('modalAvatar').style.background = a.authorColor;
+    document.getElementById('modalBody').innerHTML    = a.body;
+
+    const imgEl = document.getElementById('modalImg');
+    imgEl.innerHTML = a.img
+      ? `<img src="${a.img}" style="width:100%;height:100%;object-fit:cover;">`
+      : `<div style="text-align:center;opacity:.5;"><div style="font-size:32px;margin-bottom:8px;">📷</div><div style="font-size:13px;">Photo à ajouter</div></div>`;
+
+    renderComments(a.id);
+    document.getElementById('articleOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  } catch(e) {
+    console.error('Erreur ouverture article:', e);
+  }
+}
+
+function closeArticle() {
+  document.getElementById('articleOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+  currentArticleId = null;
+}
+document.getElementById('articleOverlay').addEventListener('click', e => {
+  if (e.target === document.getElementById('articleOverlay')) closeArticle();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeArticle(); });
+
+// ══════════════════════════════════════════════════════════════
+// COMMENTS
+// ══════════════════════════════════════════════════════════════
+function renderComments(id) {
+  const list = commentsState[id] || [];
+  document.getElementById('commentsCount').textContent = list.length;
+  document.getElementById('commentsList').innerHTML = list.length === 0
+    ? '<p style="color:var(--muted);font-size:13px;padding:8px 0 16px">Soyez le premier à commenter !</p>'
+    : list.map(c => `
+      <div class="comment-item">
+        <div class="comment-avatar" style="background:${c.color}">${c.init}</div>
+        <div class="comment-content">
+          <div class="comment-header">
+            <span class="comment-name">${c.name}</span>
+            <span class="comment-time">${c.time}</span>
+          </div>
+          <div class="comment-text">${c.text}</div>
+        </div>
+      </div>`).join('');
+}
+
+async function submitComment() {
+  const name  = document.getElementById('commentName').value.trim();
+  const email = document.getElementById('commentEmail').value.trim();
+  const text  = document.getElementById('commentText').value.trim();
+  if (!name || !text) { alert('Merci de renseigner votre nom et un commentaire.'); return; }
+  if (currentArticleId === null) return;
+
+  const btn = document.querySelector('.comment-submit');
+  btn.disabled = true; btn.textContent = 'Envoi…';
+
+  try {
+    const res = await apiPost(`/api/articles/${currentArticleId}/comments`, { name, email, text });
+    if (res.success) {
+      document.getElementById('commentName').value  = '';
+      document.getElementById('commentEmail').value = '';
+      document.getElementById('commentText').value  = '';
+      // Afficher un message de confirmation au lieu d'insérer (commentaire en modération)
+      const form = document.querySelector('.comment-form');
+      form.innerHTML = `<div style="background:rgba(45,122,79,.1);border:1px solid rgba(45,122,79,.3);color:#2d7a4f;padding:14px 18px;border-radius:10px;font-size:14px;">✅ Commentaire soumis — il apparaîtra après modération.</div>`;
+    }
+  } catch(e) {
+    alert('Erreur lors de l\'envoi. Réessayez.');
+  }
+  btn.disabled = false; btn.textContent = 'Publier le commentaire';
+}
+
+// ══════════════════════════════════════════════════════════════
+// NEWSLETTER — connectée au backend
+// ══════════════════════════════════════════════════════════════
+async function subscribeNewsletter(btn) {
+  const name  = document.getElementById('newsletterName').value.trim();
+  const email = document.getElementById('newsletterEmail').value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!name)  { alert('Merci d\'entrer votre prénom.'); return; }
+  if (!email || !emailRegex.test(email)) { alert('Merci d\'entrer une adresse email valide.'); return; }
+
+  btn.disabled = true; btn.textContent = '…';
+  try {
+    const res = await apiPost('/api/newsletter', { name, email });
+    btn.textContent = res.message === 'Déjà abonné !' ? '✅ Déjà abonné !' : '✅ Abonné(e) !';
+    btn.style.background = '#2d7a4f';
+    btn.style.color      = 'white';
+  } catch(e) {
+    btn.disabled = false; btn.textContent = 'Je m\'abonne ✓';
+    alert('Erreur. Réessayez.');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// CATEGORY FILTER
+// ══════════════════════════════════════════════════════════════
+document.querySelectorAll('.cat-pill, .nav-link').forEach(el => {
+  el.addEventListener('click', e => {
+    e.preventDefault();
+    const filter = el.dataset.filter || el.dataset.cat || 'all';
+    document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-link').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll(`[data-filter="${filter}"]`).forEach(p => p.classList.add('active'));
+    document.querySelectorAll(`[data-cat="${filter}"]`).forEach(p => p.classList.add('active'));
+    loadArticles(filter);
+    document.querySelector('.section-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+// ══════════════════════════════════════════════════════════════
+// SEARCH — connectée au backend
+// ══════════════════════════════════════════════════════════════
+const searchInput   = document.getElementById('searchInput');
+const searchResults = document.getElementById('searchResults');
+let searchTimeout;
+
+searchInput.addEventListener('input', () => {
+  clearTimeout(searchTimeout);
+  const q = searchInput.value.trim();
+  if (q.length < 2) { searchResults.classList.remove('show'); return; }
+  searchTimeout = setTimeout(async () => {
+    try {
+      const matches = await apiFetch(`/api/articles?q=${encodeURIComponent(q)}`);
+      if (matches.length === 0) {
+        searchResults.innerHTML = '<div class="search-no-result">Aucun résultat trouvé.</div>';
+      } else {
+        searchResults.innerHTML = matches.map(a => `
+          <div class="search-result-item" onclick="openArticle(${a.id}); searchResults.classList.remove('show'); searchInput.value=''">
+            <strong>${a.title}</strong>
+            <span>${a.catLabel} · ${a.author}</span>
+          </div>`).join('');
+      }
+      searchResults.classList.add('show');
+    } catch(e) { searchResults.classList.remove('show'); }
+  }, 300);
+});
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-wrap')) searchResults.classList.remove('show');
+});
+
+// ══════════════════════════════════════════════════════════════
+// DRAG TO SCROLL
+// ══════════════════════════════════════════════════════════════
+const scroll = document.getElementById('featuredScroll');
+let isDragging = false, startX, scrollLeft;
+scroll.addEventListener('mousedown', e => { isDragging = true; startX = e.pageX - scroll.offsetLeft; scrollLeft = scroll.scrollLeft; });
+scroll.addEventListener('mousemove', e => { if (!isDragging) return; e.preventDefault(); scroll.scrollLeft = scrollLeft - (e.pageX - scroll.offsetLeft - startX); });
+scroll.addEventListener('mouseup',   () => isDragging = false);
+scroll.addEventListener('mouseleave',() => isDragging = false);
+
+// ══════════════════════════════════════════════════════════════
+// SCROLL REVEAL
+// ══════════════════════════════════════════════════════════════
+const revealObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.1 });
+function observeCards() {
+  document.querySelectorAll('.fade-in:not(.visible)').forEach(el => revealObserver.observe(el));
+}
+
+// ══════════════════════════════════════════════════════════════
+// CONTACT MODAL
+// ══════════════════════════════════════════════════════════════
+function openContact() {
+  document.getElementById('contactOverlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeContact() {
+  document.getElementById('contactOverlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function handleContactOverlayClick(e) {
+  if (e.target === document.getElementById('contactOverlay')) closeContact();
+}
+async function sendContactForm() {
+  const name    = document.getElementById('cfName').value.trim();
+  const email   = document.getElementById('cfEmail').value.trim();
+  const subject = document.getElementById('cfSubject').value.trim();
+  const message = document.getElementById('cfMessage').value.trim();
+  if (!name || !email || !message) { alert('Merci de remplir votre nom, email et message.'); return; }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) { alert('Adresse email invalide.'); return; }
+
+  const btn = document.querySelector('.contact-form-btn');
+  btn.disabled = true; btn.textContent = 'Envoi…';
+
+  // Envoi via FormSubmit
+  try {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = 'https://formsubmit.co/kleininasser@gmail.com';
+    form.style.display = 'none';
+    const fields = { _subject: subject || 'Message depuis Djawleerou Garoua', name, email, message, _captcha: 'false', _replyto: email };
+    Object.entries(fields).forEach(([k, v]) => {
+      const input = document.createElement('input');
+      input.name = k; input.value = v; form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    document.getElementById('contactForm').innerHTML = `
+      <div style="background:#e6f7ee;border:1.5px solid #48a872;color:#2d7a4f;padding:20px;border-radius:12px;text-align:center;">
+        <div style="font-size:28px;margin-bottom:8px;">✅</div>
+        <strong>Message envoyé !</strong><br>
+        <span style="font-size:13px;">Nous vous répondrons bientôt à ${email}</span>
+      </div>`;
+  } catch(e) {
+    btn.disabled = false; btn.textContent = 'Envoyer le message →';
+    alert('Erreur lors de l\'envoi. Réessayez ou contactez-nous sur WhatsApp.');
+  }
+}
+
+// ══════════════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════════════
+loadArticles('all');
+</script>
+</body>
+</html>
