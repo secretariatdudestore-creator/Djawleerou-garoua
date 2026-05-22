@@ -408,9 +408,53 @@ function loginPage(error = '') {
 }
 
 // ════════════════════════════════════════════════════════════════
+//  MIGRATION AUTOMATIQUE (si MongoDB est vide)
+// ════════════════════════════════════════════════════════════════
+async function autoMigrate() {
+  try {
+    const count = await articles().countDocuments();
+    if (count > 0) {
+      console.log(`ℹ️  Base déjà remplie (${count} articles) — migration ignorée`);
+      return;
+    }
+    const dataFile = path.join(__dirname, 'data', 'data.json');
+    if (!fs.existsSync(dataFile)) {
+      console.log('ℹ️  Pas de data.json trouvé — migration ignorée');
+      return;
+    }
+    const data = JSON.parse(fs.readFileSync(dataFile, 'utf8'));
+    console.log('🚀 Base vide — migration automatique en cours...');
+    if (data.articles && data.articles.length > 0) {
+      await articles().insertMany(data.articles);
+      console.log(`✅ ${data.articles.length} articles importés`);
+    }
+    if (data.comments && data.comments.length > 0) {
+      await comments().insertMany(data.comments);
+      console.log(`✅ ${data.comments.length} commentaires importés`);
+    }
+    if (data.newsletter && data.newsletter.length > 0) {
+      await newsletter().insertMany(data.newsletter);
+      console.log(`✅ ${data.newsletter.length} abonnés importés`);
+    }
+    if (data.nextId) {
+      await counters().deleteMany({});
+      await counters().insertMany([
+        { _id: 'article',    seq: data.nextId.article    || 10 },
+        { _id: 'comment',    seq: data.nextId.comment    || 1  },
+        { _id: 'newsletter', seq: data.nextId.newsletter || 1  }
+      ]);
+    }
+    console.log('🎉 Migration automatique terminée !');
+  } catch (e) {
+    console.error('⚠️  Erreur migration automatique :', e.message);
+  }
+}
+
+// ════════════════════════════════════════════════════════════════
 //  DÉMARRAGE
 // ════════════════════════════════════════════════════════════════
-connectDB().then(() => {
+connectDB().then(async () => {
+  await autoMigrate();
   app.listen(PORT, () => {
     console.log('\n╔══════════════════════════════════════════╗');
     console.log('║  🌍  DJAWLEEROU GAROUA — Serveur démarré ║');
