@@ -2286,7 +2286,6 @@ async function openArticle(id) {
     const likeCount = document.getElementById('likeCount');
     const likeLabel = document.getElementById('likeLabel');
     likeCount.textContent = a.likes || 0;
-    // Vérifier si déjà liké via cookie local
     const alreadyLiked = document.cookie.split(';').some(c => c.trim() === `liked_${a.id}=1`);
     if (alreadyLiked) {
       likeBtn.classList.add('liked');
@@ -2295,6 +2294,9 @@ async function openArticle(id) {
       likeBtn.classList.remove('liked');
       likeLabel.textContent = "J'aime";
     }
+
+    // Légende de l'image
+    const captionEl = document.getElementById('modalCaption');
     if (captionEl) {
       if (a.caption && a.img) {
         captionEl.textContent = a.caption;
