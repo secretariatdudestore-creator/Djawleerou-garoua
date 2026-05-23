@@ -942,8 +942,37 @@
     .modal-like-section {
       padding: 24px 32px 0;
       display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    .share-btns {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
       justify-content: center;
     }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 16px;
+      border-radius: 50px;
+      border: 1.5px solid rgba(0,0,0,.1);
+      background: white;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: var(--font-body);
+    }
+    .share-wa  { border-color: #25d366; color: #25d366; }
+    .share-wa:hover  { background: #25d366; color: white; }
+    .share-fb  { border-color: #1877f2; color: #1877f2; }
+    .share-fb:hover  { background: #1877f2; color: white; }
+    .share-copy { border-color: var(--muted); color: var(--muted); }
+    .share-copy:hover { background: var(--dark); color: white; }
+    .share-copy.copied { border-color: var(--green); color: var(--green); }
     .like-btn {
       display: flex;
       align-items: center;
@@ -1989,6 +2018,19 @@
         <span id="likeCount">0</span>
         <span id="likeLabel">J'aime</span>
       </button>
+
+      <!-- Boutons Partager -->
+      <div class="share-btns">
+        <button class="share-btn share-wa" onclick="shareArticle('whatsapp')" title="Partager sur WhatsApp">
+          💬 WhatsApp
+        </button>
+        <button class="share-btn share-fb" onclick="shareArticle('facebook')" title="Partager sur Facebook">
+          📘 Facebook
+        </button>
+        <button class="share-btn share-copy" onclick="shareArticle('copy')" title="Copier le lien" id="copyBtn">
+          🔗 Copier le lien
+        </button>
+      </div>
     </div>
 
     <div class="comments-section">
@@ -2343,6 +2385,27 @@ function renderComments(id) {
           <div class="comment-text">${c.text}</div>
         </div>
       </div>`).join('');
+}
+
+function shareArticle(platform) {
+  const url = encodeURIComponent(window.location.href);
+  const title = encodeURIComponent(document.getElementById('modalTitle').textContent);
+  const copyBtn = document.getElementById('copyBtn');
+
+  if (platform === 'whatsapp') {
+    window.open(`https://wa.me/?text=${title}%20-%20${url}`, '_blank');
+  } else if (platform === 'facebook') {
+    window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}&quote=${title}`, '_blank');
+  } else if (platform === 'copy') {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      copyBtn.textContent = '✅ Copié !';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyBtn.innerHTML = '🔗 Copier le lien';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    });
+  }
 }
 
 async function likeArticle() {
