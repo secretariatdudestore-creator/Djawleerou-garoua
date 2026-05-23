@@ -1,119 +1,64 @@
-# 🌍 Garoua Vibes — Blog
+# Djawleerou Garoua 🌍
 
-Blog dédié à la culture, les monuments et la vie locale de Garoua, Nord Cameroun.
+Blog dédié à la culture, l'histoire, les monuments et la vie locale de Garoua, Nord Cameroun.
 
----
+## 🚀 Démarrage en local
+
+### Prérequis
+- Node.js installé
+- Compte MongoDB Atlas
+- Fichier `.env` configuré (voir ci-dessous)
+
+### Installation
+
+```bash
+npm install
+node server.js
+```
+
+### Configuration `.env`
+
+Créer un fichier `.env` à la racine du projet :
+
+```
+ADMIN_PASSWORD=votre_mot_de_passe
+SESSION_SECRET=votre_secret
+MONGODB_URI=votre_uri_mongodb
+PORT=3000
+```
+
+> ⚠️ Ne jamais partager ou publier votre fichier `.env`
 
 ## 📁 Structure du projet
 
 ```
-garoua-vibes/
-├── server.js          ← Serveur Node.js (backend)
-├── package.json       ← Dépendances npm
+djawleerou-garoua/
+├── public/
+│   ├── index.html      # Blog public
+│   ├── admin.html      # Dashboard admin
+│   └── images/         # Images uploadées
 ├── data/
-│   └── data.json      ← Base de données (articles, commentaires, newsletter)
-└── public/
-    ├── index.html     ← Blog public (frontend)
-    ├── admin.html     ← Dashboard admin
-    └── images/        ← Images uploadées (vide au départ)
+│   └── data.json       # Backup données
+├── server.js           # Serveur Node.js
+├── .env                # Variables d'environnement (non publié)
+└── README.md
 ```
 
----
-
-## 🚀 Installation & Lancement
-
-### 1. Installer les dépendances
-
-Ouvrez un terminal dans le dossier `garoua-vibes/` et lancez :
-
-```bash
-npm install
-```
-
-### 2. Démarrer le serveur
-
-```bash
-node server.js
-```
-
-### 3. Ouvrir dans le navigateur
+## 🌐 Accès
 
 | Page | URL |
 |------|-----|
 | Blog public | http://localhost:3000 |
 | Dashboard admin | http://localhost:3000/admin |
 
----
+## 🏗 Stack technique
 
-## 🔐 Connexion Admin
+- **Frontend** : HTML, CSS, JavaScript vanilla
+- **Backend** : Node.js + Express
+- **Base de données** : MongoDB Atlas
+- **Hébergement** : Render
+- **Déploiement** : GitHub
 
-Mot de passe par défaut : `@12gahimle21`
+## 📝 Licence
 
-> ⚠️ **Important** : Changez ce mot de passe dans `server.js` (ligne `ADMIN_PASSWORD`) avant de mettre en ligne.
-
----
-
-## ✍️ Publier un article
-
-1. Allez sur http://localhost:3000/admin
-2. Connectez-vous avec votre mot de passe
-3. Cliquez sur **"Nouvel article"** dans le menu
-4. Remplissez le titre, la catégorie, le contenu, ajoutez une photo
-5. Choisissez **"Publié"** dans le statut pour qu'il apparaisse sur le blog
-6. Cliquez **"Enregistrer"**
-
-L'article apparaît immédiatement sur le blog public.
-
----
-
-## 💬 Modération des commentaires
-
-Les commentaires soumis par les lecteurs sont en **attente de modération** par défaut.  
-Pour les approuver :
-
-1. Admin → **Commentaires**
-2. Cliquez **"✓ Approuver"** sur le commentaire
-3. Il apparaît instantanément sur le blog
-
----
-
-## 📩 Newsletter
-
-Les abonnés sont visibles dans Admin → **Newsletter**.  
-Vous pouvez les exporter en CSV.
-
----
-
-## 🖼️ Images
-
-- Format acceptés : JPG, PNG, WEBP, GIF
-- Taille max : 5 MB par image
-- Uploadez via Admin → **Médiathèque** ou directement dans le formulaire article
-
----
-
-## 🔧 Développement (rechargement automatique)
-
-```bash
-npm run dev
-```
-*(nécessite nodemon — installé automatiquement avec `npm install`)*
-
----
-
-## 🌐 Mise en ligne (hébergement)
-
-Pour héberger sur un VPS ou Render/Railway :
-
-1. Uploadez tous les fichiers sur votre serveur
-2. Lancez `npm install`
-3. Démarrez avec `node server.js` ou un gestionnaire de processus comme **PM2** :
-   ```bash
-   npm install -g pm2
-   pm2 start server.js --name garoua-vibes
-   pm2 save
-   ```
-
----
-
-Fait avec ❤️ à Garoua, Cameroun.
+Tous droits réservés © 2026 Djawleerou Garoua
