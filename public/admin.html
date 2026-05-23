@@ -163,6 +163,8 @@
     .btn-danger:hover { background: rgba(239,68,68,.2); }
     .btn-success { background: rgba(34,197,94,.12); color: var(--green); border: 1px solid rgba(34,197,94,.2); }
     .btn-success:hover { background: rgba(34,197,94,.2); }
+    .btn-warning { background: rgba(245,158,11,.12); color: var(--amber); border: 1px solid rgba(245,158,11,.2); }
+    .btn-warning:hover { background: rgba(245,158,11,.25); }
     .btn-sm { padding: 5px 11px; font-size: 11px; border-radius: 6px; }
 
     .page-content { padding: 28px; flex: 1; }
@@ -880,6 +882,9 @@ async function renderArticles() {
                   <button class="topbar-btn btn-sm ${a.status === 'published' ? 'btn-secondary' : 'btn-success'}" onclick="toggleStatus(${a.id},'${a.status}')">
                     ${a.status === 'published' ? '📥 Dépublier' : '🚀 Publier'}
                   </button>
+                  <button class="topbar-btn btn-sm ${a.trending ? 'btn-warning' : 'btn-secondary'}" onclick="toggleTrending(${a.id},${!!a.trending})" title="${a.trending ? 'Retirer des tendances' : 'Mettre en tendance'}">
+                    ${a.trending ? '🔥 Tendance' : '📈 Tendance?'}
+                  </button>
                   <button class="topbar-btn btn-sm btn-danger" onclick="deleteArticle(${a.id},'${a.title.replace(/'/g,"\\'")}')">🗑</button>
                 </div>
               </td>
@@ -893,6 +898,12 @@ function filterArticleTable(q) {
   document.querySelectorAll('#articlesTable tbody tr').forEach(row => {
     row.style.display = row.dataset.title.includes(q.toLowerCase()) ? '' : 'none';
   });
+}
+
+async function toggleTrending(id, current) {
+  await api('PUT', `/api/admin/articles/${id}`, { trending: !current });
+  showToast(!current ? '🔥 Article mis en tendance !' : 'Retiré des tendances');
+  renderArticles();
 }
 
 async function toggleStatus(id, current) {
@@ -981,6 +992,10 @@ function renderNewArticle() {
               <p style="margin-top:4px;font-size:11px;">JPG, PNG, WEBP — max 5MB</p>
               <img class="upload-preview" id="imgPreview"/>
             </div>
+          </div>
+          <div class="form-group form-full">
+            <label class="form-label">Légende de l'image</label>
+            <input class="form-input" id="na-caption" placeholder="Ex: Vue de la mosquée centrale de Garoua"/>
           </div>
           <div class="form-group">
             <label class="form-label">Tags (séparés par virgule)</label>
@@ -1074,6 +1089,7 @@ async function submitNewArticle(status) {
   fd.append('tags',     document.getElementById('na-tags').value);
   fd.append('status',   status);
   fd.append('featured', document.getElementById('na-featured')?.checked ? 'true' : 'false');
+  fd.append('caption',  document.getElementById('na-caption')?.value || '');
 
   const imgInput = document.getElementById('na-img');
   if (imgInput?.files[0]) fd.append('img', imgInput.files[0]);
@@ -1132,8 +1148,23 @@ async function openEditModal(id) {
       <textarea class="form-textarea" id="edit-excerpt">${a.excerpt}</textarea>
     </div>
     <div class="form-group form-full">
-      <label class="form-label">Contenu (HTML)</label>
-      <textarea class="form-textarea tall" id="edit-content" style="font-family:monospace;font-size:12px;">${a.content}</textarea>
+      <label class="form-label">Contenu *</label>
+      <div class="editor-toolbar">
+        <button onclick="fmtEdit('bold')" title="Gras"><b>G</b></button>
+        <button onclick="fmtEdit('italic')" title="Italique"><i>I</i></button>
+        <div class="sep"></div>
+        <button onclick="insertEditBlock('h3')" title="Titre H3">H3</button>
+        <button onclick="insertEditBlock('p')" title="Paragraphe">¶</button>
+        <button onclick="insertEditBlock('blockquote')" title="Citation">❝</button>
+        <div class="sep"></div>
+        <button onclick="fmtEdit('insertUnorderedList')" title="Liste">•</button>
+        <button onclick="fmtEdit('insertOrderedList')" title="Liste numérotée">1.</button>
+        <div class="sep"></div>
+        <button onclick="viewEditSource()" title="Code HTML" id="editSrcBtn">⟨/⟩</button>
+      </div>
+      <div id="editContentEditor" contenteditable="true" spellcheck="true" style="min-height:220px;padding:16px;background:var(--surface2);border:1.5px solid var(--border2);border-radius:0 0 8px 8px;outline:none;font-size:14px;line-height:1.7;color:var(--text);"></div>
+      <textarea id="editContentSource" class="form-textarea tall" style="display:none;font-family:monospace;font-size:12px;" placeholder="HTML source…"></textarea>
+      <input type="hidden" id="edit-content"/>
     </div>
     <div class="form-group">
       <label class="form-label">Tags</label>
@@ -1148,10 +1179,60 @@ async function openEditModal(id) {
         <img class="upload-preview" id="editImgPreview"/>
       </div>
     </div>
+    <div class="form-group">
+      <label class="form-label">Légende de l'image</label>
+      <input class="form-input" id="edit-caption" value="${(a.caption||'').replace(/"/g,'&quot;')}" placeholder="Ex: Vue de la mosquée centrale de Garoua"/>
+    </div>
     <input type="hidden" id="edit-catLabel" value="${a.catLabel||''}"/>
     <input type="hidden" id="edit-catColor" value="${a.catColor||''}"/>`;
 
   document.getElementById('articleModal').classList.add('open');
+
+  // Initialiser l'éditeur riche avec le contenu existant
+  setTimeout(() => {
+    const editEditor = document.getElementById('editContentEditor');
+    if (editEditor) editEditor.innerHTML = a.content || '';
+  }, 50);
+}
+
+function fmtEdit(cmd) {
+  document.getElementById('editContentEditor').focus();
+  document.execCommand(cmd, false, null);
+}
+
+function insertEditBlock(tag) {
+  const editor = document.getElementById('editContentEditor');
+  editor.focus();
+  const el = document.createElement(tag);
+  el.textContent = tag === 'blockquote' ? 'Citation…' : tag === 'h3' ? 'Titre…' : 'Paragraphe…';
+  const sel = window.getSelection();
+  if (sel.rangeCount) {
+    const range = sel.getRangeAt(0);
+    range.collapse(false);
+    range.insertNode(el);
+    range.setStartAfter(el);
+    sel.removeAllRanges();
+    sel.addRange(range);
+  } else {
+    editor.appendChild(el);
+  }
+}
+
+function viewEditSource() {
+  const editor = document.getElementById('editContentEditor');
+  const source = document.getElementById('editContentSource');
+  const btn    = document.getElementById('editSrcBtn');
+  if (editor.style.display !== 'none') {
+    source.value = editor.innerHTML;
+    editor.style.display = 'none';
+    source.style.display = 'block';
+    btn.style.color = 'var(--orange)';
+  } else {
+    editor.innerHTML = source.value;
+    source.style.display = 'none';
+    editor.style.display = 'block';
+    btn.style.color = '';
+  }
 }
 
 function previewEditImage(input) {
@@ -1175,13 +1256,20 @@ function updateEditCatMeta(val) {
 
 async function saveArticle() {
   if (!editingArticleId) return;
+
+  // Récupérer le contenu depuis l'éditeur riche ou la source HTML
+  const editEditor = document.getElementById('editContentEditor');
+  const editSource = document.getElementById('editContentSource');
+  const content = editSource.style.display !== 'none' ? editSource.value : editEditor.innerHTML;
+
   const fd = new FormData();
   fd.append('title',    document.getElementById('edit-title').value);
   fd.append('category', document.getElementById('edit-category').value);
   fd.append('catLabel', document.getElementById('edit-catLabel').value);
   fd.append('catColor', document.getElementById('edit-catColor').value);
   fd.append('excerpt',  document.getElementById('edit-excerpt').value);
-  fd.append('content',  document.getElementById('edit-content').value);
+  fd.append('content',  content);
+  fd.append('caption',  document.getElementById('edit-caption')?.value || '');
   fd.append('tags',     document.getElementById('edit-tags').value);
   fd.append('status',   document.getElementById('edit-status').value);
   fd.append('author',   document.getElementById('edit-author').value);

@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Djaouleerou-Garoua — Culture, Vie & Beauté du Nord</title>
-  <meta name="description" content="Découvrez la beauté cachée de Garoua — ses monuments, sa culture, ses saveurs et ses recoins."/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Bricolage+Grotesque:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
-   <!-- SEO -->
+  <title>Djawleerou Garoua — Culture, Vie & Beauté du Nord Cameroun</title>
+
+  <!-- SEO -->
   <meta name="description" content="Djawleerou Garoua est le blog de référence sur la ville de Garoua au Cameroun. Monuments, culture, saveurs locales, événements et vie quotidienne du Nord."/>
   <meta name="author" content="Abdoul Nasser"/>
   <meta name="keywords" content="Garoua, Cameroun, Nord Cameroun, culture, monuments, saveurs, événements, blog"/>
@@ -25,7 +24,14 @@
   <meta property="og:image:width" content="1200"/>
   <meta property="og:image:height" content="630"/>
   <meta property="og:locale" content="fr_FR"/>
- <style>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="Djawleerou Garoua — Culture, Vie & Beauté du Nord Cameroun"/>
+  <meta name="twitter:description" content="Découvrez Garoua autrement : monuments historiques, gastronomie locale, événements culturels et récits du quotidien au cœur du Nord Cameroun."/>
+  <meta name="twitter:image" content="https://djawleerou-garoua.onrender.com/images/og-image.jpg"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Bricolage+Grotesque:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet"/>
+  <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -924,6 +930,13 @@
       text-align: center;
       gap: 10px;
     }
+    .modal-caption {
+      padding: 8px 32px 0;
+      font-size: 12px;
+      color: var(--muted);
+      font-style: italic;
+      text-align: center;
+    }
 
     .article-modal-body {
       padding: 32px;
@@ -1280,6 +1293,274 @@
     .goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed span { padding: 0 !important; }
     /* Cacher le logo "Google Translate" */
     .goog-te-gadget > span { display: none !important; }
+    /* ════════════════════════════════
+       À PROPOS
+    ════════════════════════════════ */
+    .apropos-section {
+      background: var(--cream);
+      padding-bottom: 80px;
+    }
+
+    /* Banner */
+    .apropos-banner {
+      position: relative;
+      height: 320px;
+      background: linear-gradient(135deg, var(--dark) 0%, #3d2a10 40%, var(--terracotta) 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .apropos-banner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,.03) 0px,
+        rgba(255,255,255,.03) 1px,
+        transparent 1px,
+        transparent 20px
+      );
+    }
+    .apropos-banner::after {
+      content: '✦ ✦ ✦';
+      position: absolute;
+      bottom: 20px;
+      right: 5vw;
+      font-size: 28px;
+      color: rgba(255,255,255,.1);
+      letter-spacing: 12px;
+    }
+    .apropos-banner-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(201,80,42,.3) 0%, transparent 70%);
+    }
+    .apropos-banner-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 5vw;
+    }
+    .apropos-eyebrow {
+      font-family: var(--font-accent);
+      color: var(--sand);
+      font-size: 18px;
+      display: block;
+      margin-bottom: 12px;
+      opacity: .85;
+    }
+    .apropos-title {
+      font-family: var(--font-head);
+      font-size: clamp(36px, 6vw, 64px);
+      color: white;
+      line-height: 1.1;
+      font-weight: 900;
+    }
+    .apropos-title em {
+      color: var(--sand);
+      font-style: italic;
+    }
+
+    /* Body */
+    .apropos-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 5vw;
+    }
+
+    /* Intro */
+    .apropos-intro-wrap {
+      position: relative;
+      margin: 56px 0 48px;
+      padding-left: 24px;
+    }
+    .apropos-intro-wrap::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 4px;
+      background: linear-gradient(to bottom, var(--terracotta), var(--ochre));
+      border-radius: 4px;
+    }
+    .apropos-intro {
+      font-size: 18px;
+      line-height: 1.8;
+      color: var(--text);
+      max-width: 720px;
+    }
+    .apropos-intro strong { color: var(--terracotta); }
+
+    /* Grid */
+    .apropos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    /* Cards */
+    .apropos-card {
+      background: white;
+      border-radius: 20px;
+      padding: 32px;
+      border: 1.5px solid rgba(0,0,0,.06);
+      box-shadow: 0 4px 24px rgba(0,0,0,.05);
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .apropos-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      border-radius: 20px 20px 0 0;
+    }
+    .apropos-card--mission::before  { background: linear-gradient(to right, var(--terracotta), var(--ochre)); }
+    .apropos-card--content::before  { background: linear-gradient(to right, var(--green), #4caf50); }
+    .apropos-card--vision::before   { background: linear-gradient(to right, var(--sky), #2196f3); }
+    .apropos-card--contact::before  { background: linear-gradient(to right, var(--ochre), var(--terracotta)); }
+
+    .apropos-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.10);
+    }
+    .apropos-card-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .apropos-card h3 {
+      font-family: var(--font-head);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 12px;
+    }
+    .apropos-card p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .apropos-card p strong { color: var(--text); }
+
+    /* Liste contenu */
+    .apropos-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .apropos-list li {
+      font-size: 14px;
+      color: var(--muted);
+      padding: 6px 10px;
+      background: var(--sand2);
+      border-radius: 8px;
+      transition: background .2s;
+    }
+    .apropos-list li:hover {
+      background: var(--sand);
+      color: var(--text);
+    }
+
+    /* Contact buttons */
+    .apropos-contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .apropos-contact-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--sand2);
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all .2s;
+      word-break: break-all;
+    }
+    .apropos-contact-btn:hover {
+      background: var(--terracotta);
+      color: white;
+      transform: translateX(4px);
+    }
+    .apropos-contact-btn--fb:hover {
+      background: #1877f2;
+    }
+
+    /* Créateur */
+    .apropos-creator {
+      background: linear-gradient(135deg, var(--dark) 0%, #3d2a10 100%);
+      border-radius: 20px;
+      padding: 36px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: rgba(255,255,255,.85);
+    }
+    .apropos-creator-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .apropos-creator p {
+      font-size: 16px;
+      line-height: 1.75;
+      margin: 0;
+    }
+    .apropos-creator strong {
+      color: var(--sand);
+    }
+
+    /* Responsive */
+    @media (max-width: 700px) {
+      .apropos-grid { grid-template-columns: 1fr; }
+      .apropos-list { grid-template-columns: 1fr; }
+      .apropos-banner { height: 240px; }
+      .apropos-creator { flex-direction: column; text-align: center; padding: 28px 20px; }
+    }
+
+    .footer-social-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .footer-social-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all .2s;
+      color: white;
+    }
+    .footer-social-btn--fb   { background: #1877f2; }
+    .footer-social-btn--wa   { background: #25d366; }
+    .footer-social-btn--mail { background: var(--terracotta); }
+    .footer-social-btn:hover { opacity: .85; transform: translateX(3px); }
+
+    /* Nav link À propos */
+    .nav-apropos-btn {
+      background: none; border: none;
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 600;
+      color: var(--muted); cursor: pointer;
+      padding: 6px 10px; border-radius: 8px;
+      transition: color .2s; text-decoration: none;
+    }
+    .nav-apropos-btn:hover { color: var(--terracotta); }
+
   </style>
 
   <!-- Google Translate API -->
@@ -1335,8 +1616,9 @@
     <a href="#" class="nav-link cat-monuments" data-cat="monuments">🏛 Monuments</a>
     <a href="#" class="nav-link cat-saveurs"   data-cat="saveurs">🍽 Saveurs</a>
     <a href="#" class="nav-link cat-vie"       data-cat="vie">🌆 Vie Locale</a>
-    <a href="#" class="nav-link cat-evenements"      data-cat="evenements">📅 Événements</a>
+    <a href="#" class="nav-link cat-evenements" data-cat="evenements">📅 Événements</a>
     <a href="#" class="nav-link"               data-cat="all">📷 Galerie</a>
+    <a href="#apropos" class="nav-link">ℹ️ À propos</a>
   </nav>
 </header>
 
@@ -1507,6 +1789,84 @@
   <div class="featured-scroll" id="featuredScroll"></div>
 </section>
 
+<!-- ════ À PROPOS ══════════════════════════════════════════════════ -->
+<section class="apropos-section" id="apropos">
+
+  <!-- Banner -->
+  <div class="apropos-banner">
+    <div class="apropos-banner-overlay"></div>
+    <div class="apropos-banner-content">
+      <span class="apropos-eyebrow">✦ Notre histoire</span>
+      <h2 class="apropos-title">À propos de<br><em>Djawleerou</em></h2>
+    </div>
+  </div>
+
+  <div class="apropos-body">
+
+    <!-- Intro -->
+    <div class="apropos-intro-wrap">
+      <p class="apropos-intro">Bienvenue sur <strong>Djawleerou Garoua</strong> — un blog consacré à Garoua, à sa culture, son histoire, sa musique, ses quartiers, ses traditions et les sujets qui font parler la population.</p>
+      <div class="apropos-intro-deco"></div>
+    </div>
+
+    <!-- Cards grid -->
+    <div class="apropos-grid">
+
+      <!-- Mission -->
+      <div class="apropos-card apropos-card--mission">
+        <div class="apropos-card-icon">🌍</div>
+        <h3>Notre mission</h3>
+        <p>Donner plus de visibilité à Garoua et au Nord Cameroun sur internet. Beaucoup de choses existent ici, mais peu sont montrées sur le web. Djawleerou veut participer à changer cela.</p>
+      </div>
+
+      <!-- Ce que vous trouverez -->
+      <div class="apropos-card apropos-card--content">
+        <div class="apropos-card-icon">📖</div>
+        <h3>Ce que vous trouverez</h3>
+        <ul class="apropos-list">
+          <li>🎭 La culture du Nord</li>
+          <li>🎵 La musique</li>
+          <li>🪘 Les traditions</li>
+          <li>🏛 Les monuments</li>
+          <li>📅 Les événements</li>
+          <li>🍽 La nourriture locale</li>
+          <li>💬 Les débats de société</li>
+          <li>🌆 L'actualité et la vie à Garoua</li>
+        </ul>
+      </div>
+
+      <!-- Vision -->
+      <div class="apropos-card apropos-card--vision">
+        <div class="apropos-card-icon">🔭</div>
+        <h3>Notre vision</h3>
+        <p>Faire de Djawleerou une <strong>référence numérique</strong> sur Garoua et le Nord Cameroun. Garder une trace numérique de certaines histoires, lieux, traditions et réalités locales pour les générations futures.</p>
+      </div>
+
+      <!-- Contact -->
+      <div class="apropos-card apropos-card--contact">
+        <div class="apropos-card-icon">✉️</div>
+        <h3>Contact</h3>
+        <div class="apropos-contact-links">
+          <a href="mailto:kleininasser@gmail.com" class="apropos-contact-btn">
+            <span>📧</span> kleininasser@gmail.com
+          </a>
+          <a href="https://www.facebook.com/profile.php?id=61590187297693" target="_blank" class="apropos-contact-btn apropos-contact-btn--fb">
+            <span>📘</span> Djawleerou-Garoua
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Créateur -->
+    <div class="apropos-creator">
+      <div class="apropos-creator-icon">✨</div>
+      <p>Djawleerou a été créé par un <strong>passionné du web et de la culture sahélienne</strong>, avec l'envie de construire une plateforme moderne dédiée à Garoua.</p>
+    </div>
+
+  </div>
+</section>
+
 <!-- ════ FOOTER ═══════════════════════════════════════════════════ -->
 <footer>
   <div class="footer-grid">
@@ -1534,9 +1894,23 @@
         <li><a href="#">Politique de confidentialité</a></li>
       </ul>
     </div>
+    <div class="footer-col">
+      <h4>Nous suivre</h4>
+      <div class="footer-social-links">
+        <a href="https://www.facebook.com/profile.php?id=61590187297693" target="_blank" class="footer-social-btn footer-social-btn--fb">
+          📘 Facebook
+        </a>
+        <a href="https://wa.me/237650424112" target="_blank" class="footer-social-btn footer-social-btn--wa">
+          💬 WhatsApp
+        </a>
+        <a href="mailto:kleininasser@gmail.com" class="footer-social-btn footer-social-btn--mail">
+          📧 Email
+        </a>
+      </div>
+    </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 <a href="#">Djawleerou Garoua</a>. Fait avec ❤ à Garoua, Cameroun.</p>
+    <p>© 2026 <a href="#">Djawleerou Garoua</a>. Fait avec ❤ à Garoua, Cameroun.</p>
     <p>Tous les droits sont réservés.</p>
   </div>
 </footer>
@@ -1566,6 +1940,7 @@
         <div style="font-size:13px;">Photo à ajouter</div>
       </div>
     </div>
+    <div class="modal-caption" id="modalCaption" style="display:none;"></div>
 
     <div class="article-modal-body" id="modalBody"></div>
 
@@ -1662,7 +2037,9 @@ function normalizeArticle(a) {
     date:        new Date(a.createdAt).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' }),
     views:       a.views >= 1000 ? (a.views/1000).toFixed(1)+'k' : String(a.views || 0),
     img:         a.img || '',
+    caption:     a.caption || '',
     featured:    a.featured || false,
+    trending:    a.trending || false,
     comments:    (a.comments || []).map(normalizeComment)
   };
 }
@@ -1796,13 +2173,19 @@ function renderFeatured() {
 }
 
 function renderTrending() {
-  const sorted = [...articles].sort((a, b) => parseFloat(b.views) - parseFloat(a.views)).slice(0, 4);
-  document.getElementById('trendingList').innerHTML = sorted.map((a, i) => `
+  // Articles marqués trending en priorité, sinon les plus vus
+  const trending = articles.filter(a => a.trending);
+  const sorted = trending.length > 0
+    ? trending.slice(0, 4)
+    : [...articles].sort((a, b) => parseFloat(b.views) - parseFloat(a.views)).slice(0, 4);
+  document.getElementById('trendingList').innerHTML = sorted.length === 0
+    ? '<p style="padding:12px;color:var(--muted);font-size:13px;">Aucun article pour le moment.</p>'
+    : sorted.map((a, i) => `
     <div class="trending-item" onclick="openArticle(${a.id})">
       <div class="trending-num">0${i+1}</div>
       <div>
         <div class="trending-title">${a.title}</div>
-        <div class="trending-meta">${a.catLabel} · ${a.date}</div>
+        <div class="trending-meta">${a.catLabel} · 👁 ${a.views} · ${a.date}</div>
       </div>
     </div>`).join('');
 }
@@ -1831,6 +2214,17 @@ async function openArticle(id) {
     imgEl.innerHTML = a.img
       ? `<img src="${a.img}" style="width:100%;height:100%;object-fit:cover;">`
       : `<div style="text-align:center;opacity:.5;"><div style="font-size:32px;margin-bottom:8px;">📷</div><div style="font-size:13px;">Photo à ajouter</div></div>`;
+
+    // Légende de l'image
+    const captionEl = document.getElementById('modalCaption');
+    if (captionEl) {
+      if (a.caption && a.img) {
+        captionEl.textContent = a.caption;
+        captionEl.style.display = 'block';
+      } else {
+        captionEl.style.display = 'none';
+      }
+    }
 
     renderComments(a.id);
     document.getElementById('articleOverlay').classList.add('open');
