@@ -553,12 +553,40 @@
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
     }
     @media (max-width: 768px) {
-      .sidebar { transform: translateX(-100%); }
+      .sidebar { transform: translateX(-100%); transition: transform .3s ease; }
       .sidebar.open { transform: translateX(0); }
       .main { margin-left: 0; }
       .stats-grid { grid-template-columns: 1fr 1fr; }
       .form-grid { grid-template-columns: 1fr; }
       .form-full { grid-column: span 1; }
+      .menu-btn { display: flex !important; }
+      .sidebar-overlay { display: block; }
+      .sidebar-overlay.active { opacity: 1; pointer-events: all; }
+    }
+
+    .menu-btn {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      background: var(--surface2);
+      border: 1.5px solid var(--border2);
+      border-radius: 10px;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--text);
+      flex-shrink: 0;
+    }
+
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.5);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .3s;
     }
 
     /* ─── SCROLLBAR ───────────────────────────── */
@@ -572,6 +600,9 @@
   </style>
 </head>
 <body>
+
+<!-- Overlay mobile -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
 <!-- ═══ SIDEBAR ══════════════════════════════════════════════ -->
 <aside class="sidebar" id="sidebar">
@@ -600,7 +631,7 @@
 <div class="main">
   <div class="topbar">
     <div style="display:flex;align-items:center;gap:12px;">
-      <button onclick="toggleSidebar()" style="background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer;display:none;" id="menuBtn">☰</button>
+      <button class="menu-btn" onclick="toggleSidebar()" id="menuBtn">☰</button>
       <span class="topbar-title" id="topbarTitle">Dashboard</span>
     </div>
     <div class="topbar-actions" id="topbarActions"></div>
@@ -659,6 +690,7 @@ let cachedStats = null;
 // ═══════════════════════════════════════════════════
 function goTo(page) {
   currentPage = page;
+  closeSidebar(); // ferme le menu sur mobile
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
   const map = { dashboard:0, articles:1, 'new-article':2, comments:3, images:4, newsletter:5 };
   const navItems = document.querySelectorAll('.nav-item');
@@ -725,7 +757,23 @@ function closeConfirm() { document.getElementById('confirmOverlay').classList.re
 // ═══════════════════════════════════════════════════
 //  SIDEBAR MOBILE
 // ═══════════════════════════════════════════════════
-function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+function toggleSidebar() {
+  const sidebar  = document.getElementById('sidebar');
+  const overlay  = document.getElementById('sidebarOverlay');
+  const isOpen   = sidebar.classList.contains('open');
+  if (isOpen) {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('active');
+  } else {
+    sidebar.classList.add('open');
+    overlay.classList.add('active');
+  }
+}
+
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('active');
+}
 if (window.innerWidth <= 768) document.getElementById('menuBtn').style.display = 'block';
 
 // ═══════════════════════════════════════════════════
