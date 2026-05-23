@@ -215,10 +215,14 @@ app.post('/api/admin/articles', requireAuth, upload.single('img'), async (req, r
       title: title.trim(), slug: slugify(title),
       category: category || 'culture', catLabel: catLabel || category, catColor: catColor || '#c9502a',
       img: req.file ? '/images/' + req.file.filename : '',
+      caption: (req.body.caption || '').trim(),
       excerpt: (excerpt || '').trim(), content: content.trim(),
       author: (author || 'Rédaction').trim(),
       tags: tags ? tags.split(',').map(t => t.trim()).filter(Boolean) : [],
-      status: status || 'draft', views: 0,
+      status: status || 'draft',
+      featured: req.body.featured === 'true',
+      trending: false,
+      views: 0,
       createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
     };
     await articles().insertOne(article);
@@ -240,6 +244,9 @@ app.put('/api/admin/articles/:id', requireAuth, upload.single('img'), async (req
     if (author)   update.author = author.trim();
     if (tags)     update.tags = tags.split(',').map(t => t.trim()).filter(Boolean);
     if (status)   update.status = status;
+    if (req.body.caption  !== undefined) update.caption  = req.body.caption.trim();
+    if (req.body.featured !== undefined) update.featured = req.body.featured === 'true';
+    if (req.body.trending !== undefined) update.trending = req.body.trending === 'true';
     if (req.file) {
       const old = await articles().findOne({ id });
       if (old?.img?.startsWith('/images/')) {

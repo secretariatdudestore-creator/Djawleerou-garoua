@@ -2151,8 +2151,16 @@ function renderGrid(filter = 'all') {
   const extra = document.getElementById('extraGrid');
   if (filtered.length === 0) { grid.innerHTML = ''; extra.innerHTML = ''; noRes.style.display = 'block'; return; }
   noRes.style.display = 'none';
-  grid.innerHTML  = filtered.slice(0, 3).map(a => renderCard(a)).join('');
-  extra.innerHTML = filtered.slice(3).map(a => renderCard(a)).join('');
+  grid.innerHTML = filtered.slice(0, 3).map(a => renderCard(a)).join('');
+
+  // À explorer : d'abord le reste de la catégorie, puis des autres catégories
+  const mainIds = new Set(filtered.slice(0, 3).map(a => a.id));
+  let explore = filtered.slice(3);
+  if (explore.length < 3) {
+    const others = articles.filter(a => !mainIds.has(a.id) && !explore.find(e => e.id === a.id));
+    explore = [...explore, ...others].slice(0, 4);
+  }
+  extra.innerHTML = explore.map(a => renderCard(a)).join('');
   setTimeout(() => document.querySelectorAll('.fade-in').forEach(el => el.classList.add('visible')), 50);
 }
 
