@@ -1618,7 +1618,7 @@
     <a href="#" class="nav-link cat-vie"       data-cat="vie">🌆 Vie Locale</a>
     <a href="#" class="nav-link cat-evenements" data-cat="evenements">📅 Événements</a>
     <a href="#" class="nav-link"               data-cat="all">📷 Galerie</a>
-    <a href="#apropos" class="nav-link">ℹ️ À propos</a>
+    <a href="#apropos" class="nav-link nav-apropos" id="navApropos">ℹ️ À propos</a>
   </nav>
 </header>
 
@@ -2316,7 +2316,7 @@ async function subscribeNewsletter(btn) {
 // ══════════════════════════════════════════════════════════════
 // CATEGORY FILTER
 // ══════════════════════════════════════════════════════════════
-document.querySelectorAll('.cat-pill, .nav-link').forEach(el => {
+document.querySelectorAll('.cat-pill, .nav-link:not(.nav-apropos)').forEach(el => {
   el.addEventListener('click', e => {
     e.preventDefault();
     const filter = el.dataset.filter || el.dataset.cat || 'all';
@@ -2327,6 +2327,12 @@ document.querySelectorAll('.cat-pill, .nav-link').forEach(el => {
     loadArticles(filter);
     document.querySelector('.section-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+});
+
+// Lien À propos
+document.getElementById('navApropos').addEventListener('click', e => {
+  e.preventDefault();
+  document.getElementById('apropos').scrollIntoView({ behavior: 'smooth' });
 });
 
 // ══════════════════════════════════════════════════════════════
