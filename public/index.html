@@ -938,6 +938,44 @@
       text-align: center;
     }
 
+    /* Like button */
+    .modal-like-section {
+      padding: 24px 32px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .like-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 28px;
+      border-radius: 50px;
+      border: 2px solid rgba(239,68,68,.3);
+      background: rgba(239,68,68,.05);
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      font-family: var(--font-body);
+    }
+    .like-btn:hover {
+      background: rgba(239,68,68,.1);
+      border-color: rgba(239,68,68,.5);
+      transform: scale(1.05);
+    }
+    .like-btn.liked {
+      background: rgba(239,68,68,.15);
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+    .like-btn.liked #likeIcon { animation: heartbeat .3s ease; }
+    @keyframes heartbeat {
+      0%   { transform: scale(1); }
+      50%  { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
     .article-modal-body {
       padding: 32px;
     }
@@ -1585,7 +1623,7 @@
     <!-- Logo -->
     <div class="logo-block">
       <div class="logo-main"> <img src="images/LOGO.jpg" alt=""></div>
-      <span class="logo-sub">Culture · Monuments · Vie Locale</span>
+      <span class="logo-sub">Culture · Patrimoine · Actualités</span>
     </div>
 
     <!-- Search -->
@@ -1612,11 +1650,11 @@
   <!-- Nav -->
   <nav class="nav-bar">
     <a href="#" class="nav-link active" data-cat="all">🏠 Accueil</a>
-    <a href="#" class="nav-link cat-culture"   data-cat="culture">🎭 Culture</a>
-    <a href="#" class="nav-link cat-monuments" data-cat="monuments">🏛 Monuments</a>
-    <a href="#" class="nav-link cat-saveurs"   data-cat="saveurs">🍽 Saveurs</a>
-    <a href="#" class="nav-link cat-vie"       data-cat="vie">🌆 Vie Locale</a>
-    <a href="#" class="nav-link cat-evenements" data-cat="evenements">📅 Événements</a>
+    <a href="#" class="nav-link cat-culture"   data-cat="culture">🎵 Culture & Musique</a>
+    <a href="#" class="nav-link cat-monuments" data-cat="monuments">🗺 Découverte & Patrimoine</a>
+    <a href="#" class="nav-link cat-saveurs"   data-cat="saveurs">🍲 Cuisine & Saveurs</a>
+    <a href="#" class="nav-link cat-vie"       data-cat="vie">💬 Débat</a>
+    <a href="#" class="nav-link cat-evenements" data-cat="evenements">📰 Actualités</a>
     <a href="#" class="nav-link"               data-cat="all">📷 Galerie</a>
     <a href="#apropos" class="nav-link nav-apropos" id="navApropos">ℹ️ À propos</a>
   </nav>
@@ -1668,11 +1706,11 @@
 <!-- ════ CATÉGORIES ═══════════════════════════════════════════════ -->
 <div class="cat-strip">
   <a class="cat-pill all active"       href="#" data-filter="all">🗂 Tous</a>
-  <a class="cat-pill culture"          href="#" data-filter="culture">🎭 Culture</a>
-  <a class="cat-pill monuments"        href="#" data-filter="monuments">🏛 Monuments</a>
-  <a class="cat-pill saveurs"          href="#" data-filter="saveurs">🍽 Saveurs</a>
-  <a class="cat-pill vie"              href="#" data-filter="vie">🌆 Vie Locale</a>
-  <a class="cat-pill evenements"          href="#" data-filter="evenements">📅 Événements</a>
+  <a class="cat-pill culture"          href="#" data-filter="culture">🎵 Culture & Musique</a>
+  <a class="cat-pill monuments"        href="#" data-filter="monuments">🗺 Découverte & Patrimoine</a>
+  <a class="cat-pill saveurs"          href="#" data-filter="saveurs">🍲 Cuisine & Saveurs</a>
+  <a class="cat-pill vie"              href="#" data-filter="vie">💬 Débat</a>
+  <a class="cat-pill evenements"          href="#" data-filter="evenements">📰 Actualités</a>
 </div>
 
 <!-- ════ ARTICLES GRID ════════════════════════════════════════════ -->
@@ -1718,7 +1756,7 @@
         <p class="about-desc">Un espace dédié à la beauté, la richesse culturelle et le dynamisme de Garoua — la perle du Nord Cameroun. Monuments, cuisine, traditions, visages…</p>
         <div class="about-tags">
           <span class="about-tag">🕌 Monuments</span>
-          <span class="about-tag">🎭 Culture</span>
+          <span class="about-tag">🎵 Culture & Musique</span>
           <span class="about-tag">🍲 Cuisine</span>
           <span class="about-tag">📸 Photographie</span>
           <span class="about-tag">🌊 Bénoué</span>
@@ -1878,11 +1916,11 @@
     <div class="footer-col">
       <h4>Catégories</h4>
       <ul>
-        <li><a href="#">🎭 Culture & Arts</a></li>
-        <li><a href="#">🏛 Monuments</a></li>
-        <li><a href="#">🍽 Saveurs locales</a></li>
-        <li><a href="#">🌆 Vie Locale</a></li>
-        <li><a href="#">📅 Événements</a></li>
+        <li><a href="#">🎵 Culture & Musique & Arts</a></li>
+        <li><a href="#">🗺 Découverte & Patrimoine</a></li>
+        <li><a href="#">🍲 Cuisine & Saveurs locales</a></li>
+        <li><a href="#">💬 Débat</a></li>
+        <li><a href="#">📰 Actualités</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1943,6 +1981,15 @@
     <div class="modal-caption" id="modalCaption" style="display:none;"></div>
 
     <div class="article-modal-body" id="modalBody"></div>
+
+    <!-- Bouton Like -->
+    <div class="modal-like-section">
+      <button class="like-btn" id="likeBtn" onclick="likeArticle()">
+        <span id="likeIcon">❤️</span>
+        <span id="likeCount">0</span>
+        <span id="likeLabel">J'aime</span>
+      </button>
+    </div>
 
     <div class="comments-section">
       <div class="comments-title">
@@ -2037,10 +2084,12 @@ function normalizeArticle(a) {
     authorColor: colors[a.category] || '#c9502a',
     date:        new Date(a.createdAt).toLocaleDateString('fr-FR', { day:'numeric', month:'short', year:'numeric' }),
     views:       a.views >= 1000 ? (a.views/1000).toFixed(1)+'k' : String(a.views || 0),
+    likes:       a.likes || 0,
     img:         a.img || '',
     caption:     a.caption || '',
     featured:    a.featured || false,
     trending:    a.trending || false,
+    commentCount: a.commentCount || 0,
     comments:    (a.comments || []).map(normalizeComment)
   };
 }
@@ -2127,7 +2176,7 @@ function renderCard(article) {
   const imgHtml = article.img
     ? `<img src="${article.img}" alt="${article.title}" style="width:100%;height:100%;object-fit:cover;display:block;">`
     : `<div class="card-img-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Photo à ajouter</span></div>`;
-  const commCount = (commentsState[article.id] || []).length;
+  const commCount = article.commentCount || (commentsState[article.id] || []).length;
   return `
   <div class="card fade-in" data-id="${article.id}" data-cat="${article.cat}" onclick="openArticle(${article.id})">
     <div class="card-img">${imgHtml}<span class="card-cat-tag ${c}">${article.catLabel}</span></div>
@@ -2144,6 +2193,7 @@ function renderCard(article) {
         </div>
         <div class="card-stats">
           <span class="card-stat">👁 ${article.views}</span>
+          <span class="card-stat">❤️ ${article.likes}</span>
           <span class="card-stat">💬 ${commCount}</span>
         </div>
       </div>
@@ -2231,8 +2281,20 @@ async function openArticle(id) {
       ? `<img src="${a.img}" style="width:100%;height:100%;object-fit:cover;">`
       : `<div style="text-align:center;opacity:.5;"><div style="font-size:32px;margin-bottom:8px;">📷</div><div style="font-size:13px;">Photo à ajouter</div></div>`;
 
-    // Légende de l'image
-    const captionEl = document.getElementById('modalCaption');
+    // Likes
+    const likeBtn = document.getElementById('likeBtn');
+    const likeCount = document.getElementById('likeCount');
+    const likeLabel = document.getElementById('likeLabel');
+    likeCount.textContent = a.likes || 0;
+    // Vérifier si déjà liké via cookie local
+    const alreadyLiked = document.cookie.split(';').some(c => c.trim() === `liked_${a.id}=1`);
+    if (alreadyLiked) {
+      likeBtn.classList.add('liked');
+      likeLabel.textContent = 'Aimé !';
+    } else {
+      likeBtn.classList.remove('liked');
+      likeLabel.textContent = "J'aime";
+    }
     if (captionEl) {
       if (a.caption && a.img) {
         captionEl.textContent = a.caption;
@@ -2279,6 +2341,22 @@ function renderComments(id) {
           <div class="comment-text">${c.text}</div>
         </div>
       </div>`).join('');
+}
+
+async function likeArticle() {
+  if (!currentArticleId) return;
+  const btn = document.getElementById('likeBtn');
+  if (btn.classList.contains('liked')) return; // déjà liké
+  try {
+    const res = await apiPost(`/api/articles/${currentArticleId}/like`, {});
+    if (res.liked) {
+      document.getElementById('likeCount').textContent = res.likes;
+      document.getElementById('likeLabel').textContent = 'Aimé !';
+      btn.classList.add('liked');
+    }
+  } catch(e) {
+    console.error('Erreur like:', e);
+  }
 }
 
 async function submitComment() {

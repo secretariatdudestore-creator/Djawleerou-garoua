@@ -13,6 +13,8 @@ const multer       = require('multer');
 const path         = require('path');
 const fs           = require('fs');
 const { MongoClient, ServerApiVersion } = require('mongodb');
+const rateLimit    = require('express-rate-limit');
+const cookieParser = require('cookie-parser');
 
 // ── Charger .env en local ─────────────────────────────────────────
 if (fs.existsSync('.env')) {
@@ -25,6 +27,28 @@ if (fs.existsSync('.env')) {
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
+
+// ── Rate Limiting ─────────────────────────────────────────────────
+// Login : max 5 tentatives par 15 minutes
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: `<html><body style="font-family:sans-serif;text-align:center;padding:60px;">
+    <h2>🔒 Trop de tentatives</h2>
+    <p>Vous avez essayé trop de fois. Réessayez dans <strong>15 minutes</strong>.</p>
+    <a href="/admin/login">Retour</a>
+  </body></html>`,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+// API publique : max 100 requêtes par minute
+const apiLimiter = rateLimit({
+  windowMs: 60 * 1000,
+  max: 100,
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
 // ── MongoDB ───────────────────────────────────────────────────────
 const MONGO_URI = process.env.MONGODB_URI;
@@ -59,6 +83,7 @@ const UPLOADS_DIR = path.join(__dirname, 'public', 'images');
 // ── Middleware ────────────────────────────────────────────────────
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: process.env.SESSION_SECRET || 'garoua-vibes-secret-2026',
@@ -83,7 +108,9 @@ const upload = multer({
   }
 });
 
-// ── Auth ──────────────────────────────────────────────────────────
+app.use('/api/articles', apiLimiter);
+app.use('/api/newsletter', apiLimiter);
+app.use('/api/comments', apiLimiter);
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'garoua2026';
 
 function requireAuth(req, res, next) {
@@ -113,18 +140,41 @@ app.get('/api/articles', async (req, res) => {
       filter.$or = [{ title: s }, { excerpt: s }, { tags: s }];
     }
     const result = await articles().find(filter).sort({ createdAt: -1 }).toArray();
-    res.json(result);
+    // Ajouter le nombre de commentaires approuvés pour chaque article
+    const withCounts = await Promise.all(result.map(async a => {
+      const count = await comments().countDocuments({ articleId: a.id, status: 'approved' });
+      return { ...a, commentCount: count, likes: a.likes || 0 };
+    }));
+    res.json(withCounts);
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
 app.get('/api/articles/:id', async (req, res) => {
   try {
     const id = parseInt(req.params.id);
-    const a = await articles().findOneAndUpdate(
-      { id, status: 'published' },
-      { $inc: { views: 1 } },
-      { returnDocument: 'after' }
-    );
+    
+    // Si connecté en admin → ne pas compter la vue
+    const isAdmin = req.session && req.session.admin;
+    
+    // Vérifier le cookie pour éviter de compter plusieurs fois
+    const cookieKey = `viewed_${id}`;
+    const alreadyViewed = req.cookies && req.cookies[cookieKey];
+    
+    let a;
+    if (isAdmin || alreadyViewed) {
+      // Admin ou déjà vu — pas d'incrément
+      a = await articles().findOne({ id, status: 'published' });
+    } else {
+      // Nouveau visiteur — incrément
+      a = await articles().findOneAndUpdate(
+        { id, status: 'published' },
+        { $inc: { views: 1 } },
+        { returnDocument: 'after' }
+      );
+      // Cookie 1 an
+      res.cookie(cookieKey, '1', { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true });
+    }
+    
     if (!a) return res.status(404).json({ error: 'Article non trouvé' });
     const comms = await comments().find({ articleId: id, status: 'approved' }).toArray();
     res.json({ ...a, comments: comms });
@@ -162,6 +212,24 @@ app.post('/api/comments/:id/like', async (req, res) => {
   } catch (e) { res.status(500).json({ error: e.message }); }
 });
 
+// Like article
+app.post('/api/articles/:id/like', async (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const cookieKey = `liked_${id}`;
+    const alreadyLiked = req.cookies && req.cookies[cookieKey];
+    if (alreadyLiked) return res.json({ liked: false, message: 'Déjà liké' });
+    const a = await articles().findOneAndUpdate(
+      { id },
+      { $inc: { likes: 1 } },
+      { returnDocument: 'after' }
+    );
+    if (!a) return res.status(404).json({ error: 'Article non trouvé' });
+    res.cookie(cookieKey, '1', { maxAge: 365 * 24 * 60 * 60 * 1000, httpOnly: true });
+    res.json({ liked: true, likes: a.likes });
+  } catch (e) { res.status(500).json({ error: e.message }); }
+});
+
 app.post('/api/newsletter', async (req, res) => {
   try {
     const { name, email } = req.body;
@@ -182,14 +250,18 @@ app.post('/api/newsletter', async (req, res) => {
 // ════════════════════════════════════════════════════════════════
 app.get('/admin/login', (req, res) => {
   if (req.session.admin) return res.redirect('/admin');
-  res.send(loginPage());
+  const ip = req.ip;
+  res.send(loginPage('', getAttempts(ip)));
 });
-app.post('/admin/login', (req, res) => {
+app.post('/admin/login', loginLimiter, (req, res) => {
+  const ip = req.ip;
   if (req.body.password === ADMIN_PASSWORD) {
+    loginAttempts[ip] = 0; // reset si succès
     req.session.admin = true;
     res.redirect('/admin');
   } else {
-    res.send(loginPage('Mot de passe incorrect ❌'));
+    loginAttempts[ip] = (loginAttempts[ip] || 0) + 1;
+    res.send(loginPage('Mot de passe incorrect ❌', loginAttempts[ip]));
   }
 });
 app.get('/admin/logout', (req, res) => {
@@ -222,6 +294,7 @@ app.post('/api/admin/articles', requireAuth, upload.single('img'), async (req, r
       status: status || 'draft',
       featured: req.body.featured === 'true',
       trending: false,
+      likes: 0,
       views: 0,
       createdAt: new Date().toISOString(), updatedAt: new Date().toISOString()
     };
@@ -372,7 +445,25 @@ app.get('/', (req, res) => {
 // ════════════════════════════════════════════════════════════════
 //  PAGE DE LOGIN
 // ════════════════════════════════════════════════════════════════
-function loginPage(error = '') {
+// Compteur de tentatives par IP (en mémoire)
+const loginAttempts = {};
+
+function getAttempts(ip) {
+  if (!loginAttempts[ip]) loginAttempts[ip] = 0;
+  return loginAttempts[ip];
+}
+
+function loginPage(error = '', attempts = 0) {
+  const warnings = [
+    null,
+    { msg: "T'as rien à faire ici 😡", color: '#f97316' },
+    { msg: "Arrête mec, c'est pas bien 😤", color: '#ef4444' },
+    { msg: "Ce site t'appartient pas, fou le camp ! 😡", color: '#dc2626' },
+    { msg: "T'es aveugle ou quoi ?! 🤦", color: '#b91c1c' },
+    { msg: "Il te reste UN seul essai, connard. 💀", color: '#7f1d1d' },
+  ];
+  const warn = attempts > 0 && attempts <= 5 ? warnings[attempts] : null;
+
   return `<!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -392,6 +483,8 @@ function loginPage(error = '') {
     input{width:100%;padding:11px 14px;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-size:14px;outline:none;transition:border-color .2s;}
     input:focus{border-color:#f97316;}
     .error{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);color:#ef4444;padding:10px 14px;border-radius:8px;font-size:13px;margin-top:16px;text-align:center;}
+    .warning{padding:12px 14px;border-radius:8px;font-size:14px;font-weight:700;margin-top:16px;text-align:center;animation:shake .4s ease;}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
     button{width:100%;padding:13px;background:#f97316;color:#fff;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;margin-top:20px;transition:background .2s;}
     button:hover{background:#ea6c00;}
   </style>
@@ -403,10 +496,11 @@ function loginPage(error = '') {
       <h1>Djawleerou Garoua</h1>
       <p>Dashboard Admin</p>
     </div>
+    ${warn ? `<div class="warning" style="background:${warn.color}22;border:1px solid ${warn.color}55;color:${warn.color};">${warn.msg}</div>` : ''}
     <form method="POST" action="/admin/login">
       <label>MOT DE PASSE</label>
       <input type="password" name="password" placeholder="••••••••" autofocus required/>
-      ${error ? `<div class="error">${error}</div>` : ''}
+      ${error && !warn ? `<div class="error">${error}</div>` : ''}
       <button type="submit">Connexion →</button>
     </form>
   </div>
