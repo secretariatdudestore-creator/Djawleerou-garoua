@@ -1998,6 +1998,7 @@
 // STATE
 // ══════════════════════════════════════════════════════════════
 let articles       = [];
+let allArticles    = []; // tous les articles toutes catégories
 let commentsState  = {};   // { articleId: [comment, ...] }
 let currentArticleId = null;
 let currentFilter    = 'all';
@@ -2094,6 +2095,13 @@ async function loadArticles(filter = 'all') {
     const url   = filter === 'all' ? '/api/articles' : `/api/articles?category=${filter}`;
     const raw   = await apiFetch(url);
     articles    = raw.map(normalizeArticle);
+    // Garder tous les articles en mémoire pour "À explorer"
+    if (filter === 'all') allArticles = articles;
+    else if (allArticles.length === 0) {
+      // Charger tous les articles en arrière-plan si pas encore fait
+      const allRaw = await apiFetch('/api/articles');
+      allArticles = allRaw.map(normalizeArticle);
+    }
     // init commentsState from what we have
     articles.forEach(a => { commentsState[a.id] = a.comments || []; });
     // Render hero uniquement sur le chargement initial (all)
@@ -2153,11 +2161,11 @@ function renderGrid(filter = 'all') {
   noRes.style.display = 'none';
   grid.innerHTML = filtered.slice(0, 3).map(a => renderCard(a)).join('');
 
-  // À explorer : d'abord le reste de la catégorie, puis des autres catégories
+  // À explorer : reste de la catégorie + articles d'autres catégories
   const mainIds = new Set(filtered.slice(0, 3).map(a => a.id));
   let explore = filtered.slice(3);
   if (explore.length < 3) {
-    const others = articles.filter(a => !mainIds.has(a.id) && !explore.find(e => e.id === a.id));
+    const others = allArticles.filter(a => !mainIds.has(a.id) && !explore.find(e => e.id === a.id));
     explore = [...explore, ...others].slice(0, 4);
   }
   extra.innerHTML = explore.map(a => renderCard(a)).join('');
