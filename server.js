@@ -16,6 +16,9 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const rateLimit    = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 const cloudinary   = require('cloudinary').v2;
+const helmet       = require('helmet');
+const compression  = require('compression');
+const MongoStore   = require('connect-mongo');
 
 // ── Cloudinary ────────────────────────────────────────────────────
 cloudinary.config({
@@ -34,6 +37,13 @@ if (fs.existsSync('.env')) {
 
 const app  = express();
 const PORT = process.env.PORT || 3000;
+
+// ── Trust proxy (Render/HTTPS) ────────────────────────────────────
+app.set('trust proxy', 1);
+
+// ── Sécurité & Performance ────────────────────────────────────────
+app.use(helmet({ contentSecurityPolicy: false }));
+app.use(compression());
 
 // ── Rate Limiting ─────────────────────────────────────────────────
 // Login : max 5 tentatives par 15 minutes
@@ -96,7 +106,16 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'garoua-vibes-secret-2026',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 24 * 60 * 60 * 1000 }
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGODB_URI,
+    ttl: 24 * 60 * 60
+  }),
+  cookie: {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'strict',
+    maxAge: 24 * 60 * 60 * 1000
+  }
 }));
 
 // ── Upload images via Cloudinary ──────────────────────────────────
@@ -126,6 +145,12 @@ async function uploadToCloudinary(buffer, originalname) {
 app.use('/api/articles', apiLimiter);
 app.use('/api/newsletter', apiLimiter);
 app.use('/api/comments', apiLimiter);
+// ── Vérification variables d'environnement ────────────────────────
+if (!process.env.ADMIN_PASSWORD) console.warn('⚠️  ADMIN_PASSWORD manquant — fallback utilisé');
+if (!process.env.SESSION_SECRET) console.warn('⚠️  SESSION_SECRET manquant — fallback utilisé');
+if (!process.env.MONGODB_URI)    console.warn('⚠️  MONGODB_URI manquant — connexion impossible');
+if (!process.env.CLOUDINARY_CLOUD_NAME) console.warn('⚠️  CLOUDINARY non configuré — uploads désactivés');
+
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'garoua2026';
 
 function requireAuth(req, res, next) {
