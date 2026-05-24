@@ -15,8 +15,15 @@ const fs           = require('fs');
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const rateLimit    = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
+const cloudinary   = require('cloudinary').v2;
 
-// ── Charger .env en local ─────────────────────────────────────────
+// ── Cloudinary ────────────────────────────────────────────────────
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key:    process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true
+});
 if (fs.existsSync('.env')) {
   const envLines = fs.readFileSync('.env', 'utf8').split('\n');
   for (const line of envLines) {
@@ -92,14 +99,8 @@ app.use(session({
   cookie: { maxAge: 24 * 60 * 60 * 1000 }
 }));
 
-// ── Upload images ─────────────────────────────────────────────────
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, UPLOADS_DIR),
-  filename: (req, file, cb) => {
-    const ext  = path.extname(file.originalname).toLowerCase();
-    cb(null, `img-${Date.now()}${ext}`);
-  }
-});
+// ── Upload images via Cloudinary ──────────────────────────────────
+const storage = multer.memoryStorage();
 const upload = multer({
   storage,
   limits: { fileSize: 5 * 1024 * 1024 },
@@ -107,6 +108,20 @@ const upload = multer({
     cb(null, ['.jpg','.jpeg','.png','.webp','.gif'].includes(path.extname(file.originalname).toLowerCase()));
   }
 });
+
+async function uploadToCloudinary(buffer, originalname) {
+  return new Promise((resolve, reject) => {
+    const ext = path.extname(originalname).toLowerCase().replace('.', '');
+    const stream = cloudinary.uploader.upload_stream(
+      { folder: 'djawleerou', resource_type: 'image', format: ext === 'jpg' ? 'jpg' : ext },
+      (error, result) => {
+        if (error) reject(error);
+        else resolve(result.secure_url);
+      }
+    );
+    stream.end(buffer);
+  });
+}
 
 app.use('/api/articles', apiLimiter);
 app.use('/api/newsletter', apiLimiter);
@@ -282,11 +297,17 @@ app.post('/api/admin/articles', requireAuth, upload.single('img'), async (req, r
   try {
     const { title, category, catLabel, catColor, excerpt, content, author, tags, status } = req.body;
     if (!title || !content) return res.status(400).json({ error: 'Titre et contenu requis' });
+    
+    let imgUrl = '';
+    if (req.file) {
+      imgUrl = await uploadToCloudinary(req.file.buffer, req.file.originalname);
+    }
+    
     const article = {
       id: await nextId('article'),
       title: title.trim(), slug: slugify(title),
       category: category || 'culture', catLabel: catLabel || category, catColor: catColor || '#c9502a',
-      img: req.file ? '/images/' + req.file.filename : '',
+      img: imgUrl,
       caption: (req.body.caption || '').trim(),
       excerpt: (excerpt || '').trim(), content: content.trim(),
       author: (author || 'Rédaction').trim(),
@@ -321,12 +342,7 @@ app.put('/api/admin/articles/:id', requireAuth, upload.single('img'), async (req
     if (req.body.featured !== undefined) update.featured = req.body.featured === 'true';
     if (req.body.trending !== undefined) update.trending = req.body.trending === 'true';
     if (req.file) {
-      const old = await articles().findOne({ id });
-      if (old?.img?.startsWith('/images/')) {
-        const p = path.join(__dirname, 'public', old.img);
-        if (fs.existsSync(p)) fs.unlinkSync(p);
-      }
-      update.img = '/images/' + req.file.filename;
+      update.img = await uploadToCloudinary(req.file.buffer, req.file.originalname);
     }
     const result = await articles().findOneAndUpdate({ id }, { $set: update }, { returnDocument: 'after' });
     if (!result) return res.status(404).json({ error: 'Article non trouvé' });
@@ -416,9 +432,14 @@ app.get('/api/admin/stats', requireAuth, async (req, res) => {
 });
 
 // ── Upload / images ───────────────────────────────────────────────
-app.post('/api/admin/upload', requireAuth, upload.single('img'), (req, res) => {
+app.post('/api/admin/upload', requireAuth, upload.single('img'), async (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'Aucun fichier reçu' });
-  res.json({ success: true, url: '/images/' + req.file.filename });
+  try {
+    const url = await uploadToCloudinary(req.file.buffer, req.file.originalname);
+    res.json({ success: true, url });
+  } catch (e) {
+    res.status(500).json({ error: e.message });
+  }
 });
 
 app.get('/api/admin/images', requireAuth, (req, res) => {
