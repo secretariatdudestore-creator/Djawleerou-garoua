@@ -18,7 +18,6 @@ const cookieParser = require('cookie-parser');
 const cloudinary   = require('cloudinary').v2;
 const helmet       = require('helmet');
 const compression  = require('compression');
-const MongoStore   = require('connect-mongo');
 
 // ── Cloudinary ────────────────────────────────────────────────────
 cloudinary.config({
@@ -106,10 +105,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'garoua-vibes-secret-2026',
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGODB_URI,
-    ttl: 24 * 60 * 60
-  }),
+
   cookie: {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
