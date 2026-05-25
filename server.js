@@ -500,9 +500,9 @@ function loginPage(error = '', attempts = 0) {
     null,
     { msg: "T'as rien à faire ici 😡", color: '#f97316' },
     { msg: "Arrête mec, c'est pas bien 😤", color: '#ef4444' },
-    { msg: "Ce site t'appartient pas, fou le camp ! 😡", color: '#dc2626' },
-    { msg: "T'es aveugle ou quoi ?! 🤦", color: '#b91c1c' },
-    { msg: "Il te reste UN seul essai, connard. 💀", color: '#7f1d1d' },
+    { msg: "Ce site t'appartient pas ! 😡", color: '#dc2626' },
+    { msg: "Non arrete!! 🤦", color: '#b91c1c' },
+    { msg: "Il te reste UN seul essai. 💀", color: '#7f1d1d' },
   ];
   const warn = attempts > 0 && attempts <= 5 ? warnings[attempts] : null;
 
